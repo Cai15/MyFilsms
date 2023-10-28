@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/favorites"
+        android:icon="@drawable/baseline_izbran_24"
+        android:title="@string/Izbran"
+        app:showAsAction="withText"/>
+    <item
+        android:id="@+id/watch_later"
+        android:icon="@drawable/baseline_podbor_24"
+        android:title="@string/Podborki"
+        app:showAsAction="withText"/>
+    <item
+        android:id="@+id/selections"
+        android:icon="@drawable/baseline_otlogi_24"
+        android:title="@string/Pozze"
+        app:showAsAction="withText"/>
+</menu>
