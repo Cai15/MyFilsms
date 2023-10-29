@@ -1,11 +1,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.MyFilms" parent="Theme.MaterialComponents.Light.DarkActionBar">
+    <style name="Base.Theme.MyFilsms" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.MyFilms" parent="Base.Theme.MyFilms" />\
+    <style name="Theme.MyFilsms" parent="Base.Theme.MyFilsms"/>
 
     <style name="RoundButton" parent="Widget.MaterialComponents.Button">
         <item name="cornerRadius">50dp</item>
