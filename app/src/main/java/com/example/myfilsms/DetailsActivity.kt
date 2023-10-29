@@ -1,11 +1,13 @@
 package com.example.myfilsms
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.myfilsms.databinding.ActivityDetailsBinding
 
 
 
+@SuppressLint("StaticFieldLeak")
 private lateinit var binding: ActivityDetailsBinding
 class DetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
