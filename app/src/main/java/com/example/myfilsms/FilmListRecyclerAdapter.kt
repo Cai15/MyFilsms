@@ -16,7 +16,7 @@ class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) : 
     override fun getItemCount() = items.size
 
     //В этом методе мы привязываем наш view holder и передаем туда "надутую" верстку нашего фильма
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return FilmViewHolder(FilmItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
@@ -39,6 +39,7 @@ class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) : 
     }
 
     //Метод для добавления объектов в наш список
+    @SuppressLint("NotifyDataSetChanged")
     fun addItems(list: List<Film>) {
         //Сначала очишаем(если не реализовать DiffUtils)
         items.clear()
