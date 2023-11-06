@@ -7,7 +7,7 @@ import com.example.myfilsms.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {
-
+    private var backPressed = 0L
 
     private lateinit var binding: ActivityMainBinding
 
@@ -37,6 +37,27 @@ class MainActivity : AppCompatActivity() {
         //Запускаем фрагмент
         supportFragmentManager.beginTransaction().replace(R.id.fragment_placeholder, fragment)
             .addToBackStack(null).commit()
+    }
+
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount == 1) {
+            if (backPressed + TIME_INTERVAL > System.currentTimeMillis()) {
+                super.onBackPressed()
+                finish()
+            } else {
+                Toast.makeText(this, "Для выхода - нажмите еще раз", Toast.LENGTH_SHORT).show()
+            }
+
+            backPressed = System.currentTimeMillis()
+        } else {
+            super.onBackPressed()
+        }
+    }
+
+
+
+    companion object{
+        const val TIME_INTERVAL = 2000
     }
 
 
