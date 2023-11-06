@@ -8,15 +8,16 @@ import androidx.fragment.app.Fragment
 import com.example.myfilsms.databinding.FragmentDetailsBinding
 
 
-class DetailsFragment : Fragment(R.layout.fragment_details) {
-    private var _binding: FragmentDetailsBinding? = null
-    private val binding get() = _binding!!
+
+class DetailsFragment : Fragment() {
+    private var fragbinding: FragmentDetailsBinding? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentDetailsBinding.inflate(inflater, container, false)
-        return binding.root
+        fragbinding = FragmentDetailsBinding.inflate(inflater, container, false)
+        return fragbinding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -30,10 +31,10 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         val film = arguments?.get("film") as Film
 
         //Устанавливаем заголовок
-        _binding.detailsToolbar.title = film.title
+        fragbinding!!.detailsToolbar.title = film.title
         //Устанавливаем картинку
-        _binding.detailsPoster.setImageResource(film.poster)
+        fragbinding!!.detailsPoster.setImageResource(film.poster)
         //Устанавливаем описание
-        _binding.detailsDescription.text = film.description
+        fragbinding!!.detailsDescription.text = film.description
     }
 }

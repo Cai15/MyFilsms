@@ -1,5 +1,6 @@
 package com.example.myfilsms
 
+
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -16,8 +17,9 @@ class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) : 
     override fun getItemCount() = items.size
 
     //В этом методе мы привязываем наш view holder и передаем туда "надутую" верстку нашего фильма
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return FilmViewHolder(FilmItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmViewHolder {
+         val viewHolder = FilmViewHolder(FilmItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return viewHolder
     }
 
     //В этом методе будет привзяка полей из объекта Film, к view из film_item.xml
@@ -39,6 +41,7 @@ class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) : 
     }
 
     //Метод для добавления объектов в наш список
+
     @SuppressLint("NotifyDataSetChanged")
     fun addItems(list: List<Film>) {
         //Сначала очишаем(если не реализовать DiffUtils)

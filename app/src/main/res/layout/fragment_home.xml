@@ -7,16 +7,15 @@
     tools:context=".HomeFragment">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/menu_TOP"
-        android:layout_width="407dp"
-        android:layout_height="193dp"
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
         android:layout_margin="10dp"
-        android:background="#E93F52"
-        android:orientation="horizontal"
         app:cardCornerRadius="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:elevation="5dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,7 +28,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:contentDescription="TODO"
                 android:scaleType="centerCrop"
                 app:srcCompat="@drawable/post3" />
 
@@ -38,7 +36,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:contentDescription="TODO"
                 android:scaleType="centerCrop"
                 app:srcCompat="@drawable/post2" />
 
@@ -47,7 +44,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1 "
-                android:contentDescription="TODO"
                 android:scaleType="centerCrop"
                 app:srcCompat="@drawable/post1" />
 
@@ -62,26 +58,26 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/disclaimer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/disclaimer"
         android:autoLink="web"
         android:linksClickable="true"
-        android:text="@string/https_www_movieposters_com"
-        app:layout_constraintTop_toBottomOf="@+id/menu_TOP"
-        app:layout_constraintVertical_bias="0.031"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="16dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_bar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/main_recycler"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_margin="16dp"
-        android:layout_marginTop="196dp"
-        app:layout_constraintHorizontal_bias="0.937"
+        android:padding="8dp"
+        tools:listitem="@layout/film_item"
+        app:layout_constraintTop_toBottomOf="@+id/disclaimer"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/menu_TOP" />
+        app:layout_constraintRight_toRightOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
