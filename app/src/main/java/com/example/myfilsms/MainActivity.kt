@@ -18,11 +18,8 @@ class MainActivity : AppCompatActivity() {
 
         initNavigation()
         //Зупускаем фрагмент при старте
-        supportFragmentManager
-            .beginTransaction()
-            .add(R.id.fragment_placeholder, HomeFragment())
-            .addToBackStack(null)
-            .commit()
+        supportFragmentManager.beginTransaction().add(R.id.fragment_placeholder, HomeFragment())
+            .addToBackStack(null).commit()
 
 
     }
@@ -38,11 +35,8 @@ class MainActivity : AppCompatActivity() {
         fragment.arguments = bundle
 
         //Запускаем фрагмент
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.fragment_placeholder, fragment)
-            .addToBackStack(null)
-            .commit()
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_placeholder, fragment)
+            .addToBackStack(null).commit()
     }
 
 

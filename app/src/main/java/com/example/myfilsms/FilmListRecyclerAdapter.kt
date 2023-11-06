@@ -9,7 +9,8 @@ import com.example.myfilsms.databinding.FilmItemBinding
 
 
 //в параметр передаем слушатель, чтобы мы потом могли обрабатывать нажатия из класса активити
-class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     //Здесь у нас хранится список элементов для RV
     private val items = mutableListOf<Film>()
 
@@ -18,7 +19,13 @@ class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) : 
 
     //В этом методе мы привязываем наш view holder и передаем туда "надутую" верстку нашего фильма
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-         val viewHolder = FilmViewHolder(FilmItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        val viewHolder = FilmViewHolder(
+            FilmItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
         return viewHolder
     }
 
