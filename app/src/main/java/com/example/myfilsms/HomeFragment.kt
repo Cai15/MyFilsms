@@ -29,7 +29,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        //return inflater.inflate(R.layout.fragment_home, container, false)
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
