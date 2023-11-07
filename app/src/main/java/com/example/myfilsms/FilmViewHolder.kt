@@ -7,7 +7,7 @@ import com.example.myfilsms.databinding.FilmItemBinding
 
 
 //В конструктор класс передается layout, который мы создали(film_item.xml)
-class FilmViewHolder(binding: FilmItemBinding) : RecyclerView.ViewHolder(binding.root) {
+class FilmViewHolder(private var binding: FilmItemBinding) : RecyclerView.ViewHolder(binding.root) {
     //Привязываем view из layout к переменным
     private val title =  binding.title
     private val poster = binding.poster
