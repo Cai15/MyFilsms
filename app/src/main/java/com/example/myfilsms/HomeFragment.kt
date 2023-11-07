@@ -36,7 +36,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //binding = FragmentHomeBinding.inflate(layoutInflater)
         //находим наш RV
         binding.mainRecycler.apply {
             filmsAdapter =

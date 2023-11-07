@@ -1,5 +1,6 @@
 package com.example.myfilsms
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,8 @@ import com.example.myfilsms.databinding.FragmentDetailsBinding
 
 class DetailsFragment : Fragment(R.layout.fragment_details) {
     private lateinit var binding: FragmentDetailsBinding
+
+    private lateinit var film: Film
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,6 +27,32 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         super.onViewCreated(view, savedInstanceState)
 
         setFilmsDetails()
+
+        binding.detailsFabFavorites.setOnClickListener {
+            if (!film.isInFavorites) {
+                binding.detailsFabFavorites.setImageResource(R.drawable.baseline_izbran_24)
+                film.isInFavorites = true
+            } else {
+                binding.detailsFabFavorites.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+                film.isInFavorites = false
+            }
+        }
+
+        binding.detailsFabShare.setOnClickListener {
+            //Создаем интент
+            val intent = Intent()
+            //Укзываем action с которым он запускается
+            intent.action = Intent.ACTION_SEND
+            //Кладем данные о нашем фильме
+            intent.putExtra(
+                Intent.EXTRA_TEXT,
+                "Check out this film: ${film.title} \n\n ${film.description}"
+            )
+            //УКазываем MIME тип, чтобы система знала, какое приложения предложить
+            intent.type = "text/plain"
+            //Запускаем наше активити
+            startActivity(Intent.createChooser(intent, "Share To:"))
+        }
     }
 
     private fun setFilmsDetails() {
@@ -36,5 +65,10 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         binding.detailsPoster.setImageResource(film.poster)
         //Устанавливаем описание
         binding.detailsDescription.text = film.description
+
+        binding.detailsFabFavorites.setImageResource(
+            if (film.isInFavorites) R.drawable.baseline_izbran_24
+            else R.drawable.ic_baseline_favorite_border_24
+        )
     }
 }
