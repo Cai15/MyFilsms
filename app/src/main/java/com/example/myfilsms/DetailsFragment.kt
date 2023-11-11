@@ -57,7 +57,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
 
     private fun setFilmsDetails() {
         //Получаем наш фильм из переданного бандла
-        val film = arguments?.get("film") as Film
+        film = arguments?.get("film") as Film
 
         //Устанавливаем заголовок
         binding.detailsToolbar.title = film.title

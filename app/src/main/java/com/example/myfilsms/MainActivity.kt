@@ -6,6 +6,7 @@ import android.widget.Toast
 import com.example.myfilsms.databinding.ActivityMainBinding
 
 
+@Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
     private var backPressed = 0L
 
@@ -16,10 +17,15 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         initNavigation()
+
         //Зупускаем фрагмент при старте
-        supportFragmentManager.beginTransaction().add(R.id.fragment_placeholder, HomeFragment())
-            .addToBackStack(null).commit()
+        supportFragmentManager
+            .beginTransaction()
+            .add(R.id.fragment_placeholder, HomeFragment())
+            .addToBackStack(null)
+            .commit()
 
 
     }
@@ -35,8 +41,11 @@ class MainActivity : AppCompatActivity() {
         fragment.arguments = bundle
 
         //Запускаем фрагмент
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_placeholder, fragment)
-            .addToBackStack(null).commit()
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment_placeholder, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 
     override fun onBackPressed() {
@@ -67,20 +76,21 @@ class MainActivity : AppCompatActivity() {
 
             when (it.itemId) {
                 R.id.favorites -> {
-                    Toast.makeText(this, "Избранное", Toast.LENGTH_SHORT).show()
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.fragment_placeholder, FavoritesFragment())
+                        .addToBackStack(null)
+                        .commit()
                     true
                 }
-
                 R.id.watch_later -> {
+                    Toast.makeText(this, "Посмотреть похже", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                R.id.selections -> {
                     Toast.makeText(this, "Подборки", Toast.LENGTH_SHORT).show()
                     true
                 }
-
-                R.id.selections -> {
-                    Toast.makeText(this, "Посмотреть позже", Toast.LENGTH_SHORT).show()
-                    true
-                }
-
                 else -> false
             }
         }
