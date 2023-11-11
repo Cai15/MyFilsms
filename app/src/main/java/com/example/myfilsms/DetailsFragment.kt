@@ -56,7 +56,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
     }
 
     private fun setFilmsDetails() {
-        //Получаем наш фильм из переданного бандла
+        //Получаем наш фильм из переданного бандлацц
         film = arguments?.get("film") as Film
 
         //Устанавливаем заголовок
