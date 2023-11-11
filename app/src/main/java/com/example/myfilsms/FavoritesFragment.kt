@@ -5,12 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myfilsms.databinding.FragmentFavoritesBinding
 
 
 class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
 
-    private  var binding: FavoritesFragmentBinding
+    private lateinit var binding: FragmentFavoritesBinding
 
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
 
@@ -18,7 +19,7 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FavoritesFragmentBinding.inflate(inflater, container, false)
+        binding = FragmentFavoritesBinding.inflate(inflater, container, false)
         return binding.root
     }
 
