@@ -2,6 +2,7 @@ package com.example.myfilsms
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.myfilsms.databinding.FilmItemBinding
 
 
@@ -18,7 +19,14 @@ class FilmViewHolder(private var binding: FilmItemBinding) : RecyclerView.ViewHo
         //Устанавливаем заголовок
         title.text = film.title
         //Устанавливаем постер
-        poster.setImageResource(film.poster)
+        //Указываем контейнер, в которм будет "жить" наша картинка
+        Glide.with(itemView)
+            //Загружаем сам ресурс
+            .load(film.poster)
+            //Центруем изображение
+            .centerCrop()
+            //Указываем ImageView, куда будем загружать изображение
+            .into(poster)
         //Устанавливаем описание
         description.text = film.description
     }

@@ -1,6 +1,11 @@
 package com.example.myfilsms
 
 import android.os.Bundle
+import android.transition.Scene
+import android.transition.Slide
+import android.transition.TransitionManager
+import android.transition.TransitionSet
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,11 +13,15 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myfilsms.databinding.FragmentHomeBinding
+import com.example.myfilsms.databinding.MergeHomeScreenContentBinding
 import java.util.Locale
 
 
+
 class HomeFragment : Fragment(R.layout.fragment_home) {
+
     private lateinit var binding: FragmentHomeBinding
+    private lateinit var mergeHomeScreenContentBinding: MergeHomeScreenContentBinding
 
 
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
@@ -33,18 +42,37 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
+
+        mergeHomeScreenContentBinding = MergeHomeScreenContentBinding.inflate(inflater, container, false)
+        return mergeHomeScreenContentBinding.root
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.searchView.setOnClickListener {
-            binding.searchView.isIconified = false
+
+        val scene = Scene.getSceneForLayout(binding.homeFragmentRoot, R.layout.merge_home_screen_content, requireContext())
+        //Создаем анимацию выезда поля поиска сверхк
+        val searchSlide = Slide(Gravity.TOP).addTarget(R.id.search_view)
+        //Создаем анимацию выезда RV снизу
+        val recyclerSlide = Slide(Gravity.BOTTOM).addTarget(R.id.main_recycler)
+        //Создаем экземпляр TransitionSet, который объеденит все наши анимации
+        val customTransition = TransitionSet().apply {
+            //Устанавливаем время за которое будет проходить анимация
+            duration = 500
+            //Добавляем сами анимации
+            addTransition(recyclerSlide)
+            addTransition(searchSlide)
+        }
+        TransitionManager.go(scene, customTransition)
+
+        mergeHomeScreenContentBinding.searchView.setOnClickListener {
+            mergeHomeScreenContentBinding.searchView.isIconified = false
         }
 
         //Подключаем слушателя изменений введенного текста в поиска
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+        mergeHomeScreenContentBinding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             //Этот метод отрабатывает при нажатии кнопки "поиск" на софт клавиатуре
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -75,7 +103,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun initRecyckler() {
-        binding.mainRecycler.apply {
+        mergeHomeScreenContentBinding.mainRecycler.apply {
             filmsAdapter =
                 FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener {
                     override fun click(film: Film) {
@@ -92,26 +120,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
-        /*находим наш RV
-        binding.mainRecycler.apply {
-            filmsAdapter =
-                FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener {
-                    override fun click(film: Film) {
-                        (requireActivity() as MainActivity).launchDetailsFragment(film)
-                    }
-                })
 
-            //Присваиваем адаптер
-            adapter = filmsAdapter
-            //Присвои layoutmanager
-            layoutManager = LinearLayoutManager(requireContext())
-            //Применяем декоратор для отступов
-            val decorator = TopSpacingItemDecoration(8)
-            addItemDecoration(decorator)
-
-            //Кладем нашу БД в RV
-            filmsAdapter.addItems(filmsDataBase)
-        }*/
     }
 
 
