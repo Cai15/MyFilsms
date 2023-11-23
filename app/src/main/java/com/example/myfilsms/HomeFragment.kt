@@ -43,13 +43,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
 
-        mergeHomeScreenContentBinding = MergeHomeScreenContentBinding.inflate(inflater, container, false)
-        return mergeHomeScreenContentBinding.root
+
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
 
         val scene = Scene.getSceneForLayout(binding.homeFragmentRoot, R.layout.merge_home_screen_content, requireContext())
