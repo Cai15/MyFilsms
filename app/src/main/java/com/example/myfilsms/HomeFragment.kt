@@ -18,13 +18,11 @@ import java.util.Locale
 
 
 
-class HomeFragment : Fragment(R.layout.fragment_home) {
+class HomeFragment : Fragment() {
 
-    private lateinit var binding: FragmentHomeBinding
-    private lateinit var mergeHomeScreenContentBinding: MergeHomeScreenContentBinding
-
-
+    private lateinit var binding: MergeHomeScreenContentBinding
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
+
     private val filmsDataBase: List<Film>
         get() = listOf(
             Film("1+1", R.drawable.odin_odin, "Аристократ на коляске нанимает в сиделки бывшего заключенного. Искрометная французская комедия с Омаром Си"),
@@ -36,23 +34,18 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             Film("Матрица (1999)", R.drawable.matrica, "Жизнь Томаса Андерсона разделена на две части: днём он — самый обычный офисный работник, получающий нагоняи от начальства, а ночью превращается в хакера по имени Нео, и нет места в сети, куда он бы не смог проникнуть. Но однажды всё меняется. Томас узнаёт ужасающую правду о реальности.")
         )
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
-        return binding.root
+    ): View {
+        binding = MergeHomeScreenContentBinding.inflate(layoutInflater, container, false)
 
 
-    }
+        initRecyckler()
 
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
-
-        val scene = Scene.getSceneForLayout(binding.homeFragmentRoot, R.layout.merge_home_screen_content, requireContext())
+        val scene = Scene.getSceneForLayout(container, R.layout.merge_home_screen_content, requireContext())
         //Создаем анимацию выезда поля поиска сверхк
         val searchSlide = Slide(Gravity.TOP).addTarget(R.id.search_view)
         //Создаем анимацию выезда RV снизу
@@ -66,35 +59,52 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             addTransition(searchSlide)
         }
         TransitionManager.go(scene, customTransition)
+        return binding.root
 
-        mergeHomeScreenContentBinding.searchView.setOnClickListener {
-            mergeHomeScreenContentBinding.searchView.isIconified = false
-        }
 
-        //Подключаем слушателя изменений введенного текста в поиска
-        mergeHomeScreenContentBinding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
-            androidx.appcompat.widget.SearchView.OnQueryTextListener {
-            //Этот метод отрабатывает при нажатии кнопки "поиск" на софт клавиатуре
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return true
+    }
+
+
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+
+            binding.searchView.setOnClickListener {
+               binding.searchView.isIconified = false
             }
-            //Этот метод отрабатывает на каждое изменения текста
-            override fun onQueryTextChange(newText: String): Boolean {
-                //Если ввод пуст то вставляем в адаптер всю БД
-                if (newText.isEmpty()) {
-                    filmsAdapter.addItems(filmsDataBase)
+
+
+            //Подключаем слушателя изменений введенного текста в поиска
+            binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+                androidx.appcompat.widget.SearchView.OnQueryTextListener {
+                //Этот метод отрабатывает при нажатии кнопки "поиск" на софт клавиатуре
+                override fun onQueryTextSubmit(query: String?): Boolean {
                     return true
                 }
-                //Фильтруем список на поискк подходящих сочетаний
-                val result = filmsDataBase.filter {
-                    //Чтобы все работало правильно, нужно и запроси и имя фильма приводить к нижнему регистру
-                    it.title.toLowerCase(Locale.getDefault()).contains(newText.toLowerCase(Locale.getDefault()))
+
+                //Этот метод отрабатывает на каждое изменения текста
+                override fun onQueryTextChange(newText: String): Boolean {
+                    //Если ввод пуст то вставляем в адаптер всю БД
+                    if (newText.isEmpty()) {
+                        filmsAdapter.addItems(filmsDataBase)
+                        return true
+                    }
+                    //Фильтруем список на поискк подходящих сочетаний
+                    val result = filmsDataBase.filter {
+                        //Чтобы все работало правильно, нужно и запроси и имя фильма приводить к нижнему регистру
+                        it.title.lowercase(Locale.getDefault())
+                            .contains(newText.lowercase(Locale.getDefault()))
+                    }
+                    //Добавляем в адаптер
+                    filmsAdapter.addItems(result)
+                    return true
                 }
-                //Добавляем в адаптер
-                filmsAdapter.addItems(result)
-                return true
-            }
-        })
+            })
+
+
 
         //находим наш RV
         initRecyckler()
@@ -102,8 +112,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         filmsAdapter.addItems(filmsDataBase)
     }
 
+
+
+
     private fun initRecyckler() {
-        mergeHomeScreenContentBinding.mainRecycler.apply {
+        binding.mainRecycler.apply {
             filmsAdapter =
                 FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener {
                     override fun click(film: Film) {
