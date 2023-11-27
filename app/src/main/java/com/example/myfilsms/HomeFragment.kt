@@ -20,7 +20,7 @@ import java.util.Locale
 
 class HomeFragment : Fragment() {
 
-    private lateinit var binding: MergeHomeScreenContentBinding
+    private lateinit var binding: FragmentHomeBinding
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
 
     private val filmsDataBase: List<Film>
@@ -39,29 +39,8 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = MergeHomeScreenContentBinding.inflate(layoutInflater, container, false)
-
-
-        initRecyckler()
-
-
-        val scene = Scene.getSceneForLayout(container, R.layout.merge_home_screen_content, requireContext())
-        //Создаем анимацию выезда поля поиска сверхк
-        val searchSlide = Slide(Gravity.TOP).addTarget(R.id.search_view)
-        //Создаем анимацию выезда RV снизу
-        val recyclerSlide = Slide(Gravity.BOTTOM).addTarget(R.id.main_recycler)
-        //Создаем экземпляр TransitionSet, который объеденит все наши анимации
-        val customTransition = TransitionSet().apply {
-            //Устанавливаем время за которое будет проходить анимация
-            duration = 500
-            //Добавляем сами анимации
-            addTransition(recyclerSlide)
-            addTransition(searchSlide)
-        }
-        TransitionManager.go(scene, customTransition)
+        binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
         return binding.root
-
-
     }
 
 
@@ -70,41 +49,36 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        AnimationHelper.performFragmentCircularRevealAnimation(binding.homeFragmentRoot, requireActivity(), 1)
 
+        binding.searchView.setOnClickListener {
+            binding.searchView.isIconified = false
+        }
 
-            binding.searchView.setOnClickListener {
-               binding.searchView.isIconified = false
+        //Подключаем слушателя изменений введенного текста в поиска
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            //Этот метод отрабатывает при нажатии кнопки "поиск" на софт клавиатуре
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
             }
-
-
-            //Подключаем слушателя изменений введенного текста в поиска
-            binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
-                androidx.appcompat.widget.SearchView.OnQueryTextListener {
-                //Этот метод отрабатывает при нажатии кнопки "поиск" на софт клавиатуре
-                override fun onQueryTextSubmit(query: String?): Boolean {
+            //Этот метод отрабатывает на каждое изменения текста
+            override fun onQueryTextChange(newText: String): Boolean {
+                //Если ввод пуст то вставляем в адаптер всю БД
+                if (newText.isEmpty()) {
+                    filmsAdapter.addItems(filmsDataBase)
                     return true
                 }
-
-                //Этот метод отрабатывает на каждое изменения текста
-                override fun onQueryTextChange(newText: String): Boolean {
-                    //Если ввод пуст то вставляем в адаптер всю БД
-                    if (newText.isEmpty()) {
-                        filmsAdapter.addItems(filmsDataBase)
-                        return true
-                    }
-                    //Фильтруем список на поискк подходящих сочетаний
-                    val result = filmsDataBase.filter {
-                        //Чтобы все работало правильно, нужно и запроси и имя фильма приводить к нижнему регистру
-                        it.title.lowercase(Locale.getDefault())
-                            .contains(newText.lowercase(Locale.getDefault()))
-                    }
-                    //Добавляем в адаптер
-                    filmsAdapter.addItems(result)
-                    return true
+                //Фильтруем список на поискк подходящих сочетаний
+                val result = filmsDataBase.filter {
+                    //Чтобы все работало правильно, нужно и запроси и имя фильма приводить к нижнему регистру
+                    it.title.toLowerCase(Locale.getDefault()).contains(newText.toLowerCase(Locale.getDefault()))
                 }
-            })
-
-
+                //Добавляем в адаптер
+                filmsAdapter.addItems(result)
+                return true
+            }
+        })
 
         //находим наш RV
         initRecyckler()

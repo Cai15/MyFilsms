@@ -30,7 +30,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
 
         binding.detailsFabFavorites.setOnClickListener {
             if (!film.isInFavorites) {
-                binding.detailsFabFavorites.setImageResource(R.drawable.baseline_izbran_24)
+                binding.detailsFabFavorites.setImageResource(R.drawable.ic_baseline_favorite_24)
                 film.isInFavorites = true
             } else {
                 binding.detailsFabFavorites.setImageResource(R.drawable.ic_baseline_favorite_border_24)
@@ -67,7 +67,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         binding.detailsDescription.text = film.description
 
         binding.detailsFabFavorites.setImageResource(
-            if (film.isInFavorites) R.drawable.baseline_izbran_24
+            if (film.isInFavorites) R.drawable.ic_baseline_favorite_24
             else R.drawable.ic_baseline_favorite_border_24
         )
     }
