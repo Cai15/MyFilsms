@@ -1,9 +1,13 @@
 package com.example.myfilsms
 
+import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.vectordrawable.graphics.drawable.Animatable2Compat
+import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
+import com.airbnb.lottie.LottieAnimationView
 import com.example.myfilsms.databinding.ActivityMainBinding
 
 
@@ -17,6 +21,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val lottieAnimationView: LottieAnimationView = binding.lottieAnim
+        lottieAnimationView.playAnimation()
 
 
         initNavigation()
