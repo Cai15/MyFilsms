@@ -1,5 +1,6 @@
 package com.example.myfilsms
 
+import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,14 +18,13 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+
+
+    @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        val lottieAnimationView: LottieAnimationView = binding.lottieAnim
-        lottieAnimationView.playAnimation()
-
 
         initNavigation()
 
@@ -34,8 +34,6 @@ class MainActivity : AppCompatActivity() {
             .add(R.id.fragment_placeholder, HomeFragment())
             .addToBackStack(null)
             .commit()
-
-
     }
 
     fun launchDetailsFragment(film: Film) {
@@ -47,7 +45,6 @@ class MainActivity : AppCompatActivity() {
         val fragment = DetailsFragment()
         //Прикрепляем нашу "посылку" к фрагменту
         fragment.arguments = bundle
-
         //Запускаем фрагмент
         supportFragmentManager
             .beginTransaction()
@@ -64,19 +61,15 @@ class MainActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "Для выхода - нажмите еще раз", Toast.LENGTH_SHORT).show()
             }
-
             backPressed = System.currentTimeMillis()
         } else {
             super.onBackPressed()
         }
     }
 
-
-
     companion object{
         const val TIME_INTERVAL = 2000
     }
-
 
     private fun initNavigation() {
 

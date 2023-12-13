@@ -13,6 +13,7 @@ class FilmViewHolder(private var binding: FilmItemBinding) : RecyclerView.ViewHo
     private val title =  binding.title
     private val poster = binding.poster
     private val description = binding.description
+    private val ratingDonut = binding.ratingDonut
 
     //В этом методе кладем данные из film в наши view
     fun bind(film: Film) {
@@ -29,5 +30,7 @@ class FilmViewHolder(private var binding: FilmItemBinding) : RecyclerView.ViewHo
             .into(poster)
         //Устанавливаем описание
         description.text = film.description
+        //Устанавливаем рэйтинг
+        ratingDonut.setProgress((film.rating * 10).toInt())
     }
 }
