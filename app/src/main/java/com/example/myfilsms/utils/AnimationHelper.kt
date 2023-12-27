@@ -1,4 +1,4 @@
-package com.example.myfilsms
+package com.example.myfilsms.utils
 
 import android.app.Activity
 import android.view.View

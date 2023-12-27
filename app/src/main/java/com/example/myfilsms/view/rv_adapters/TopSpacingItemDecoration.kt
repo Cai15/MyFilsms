@@ -1,4 +1,4 @@
-package com.example.myfilsms
+package com.example.myfilsms.view.rv_adapters
 
 import android.content.res.Resources
 import android.graphics.Rect

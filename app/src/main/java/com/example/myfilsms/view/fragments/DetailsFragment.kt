@@ -1,4 +1,4 @@
-package com.example.myfilsms
+package com.example.myfilsms.view.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,8 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.myfilsms.R
 import com.example.myfilsms.databinding.FragmentDetailsBinding
-
+import com.example.myfilsms.domain.Film
 
 
 class DetailsFragment : Fragment(R.layout.fragment_details) {

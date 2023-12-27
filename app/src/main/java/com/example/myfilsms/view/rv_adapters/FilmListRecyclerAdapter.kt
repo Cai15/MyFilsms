@@ -1,11 +1,13 @@
-package com.example.myfilsms
+package com.example.myfilsms.view.rv_adapters
 
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myfilsms.view.rv_viewholders.FilmViewHolder
 import com.example.myfilsms.databinding.FilmItemBinding
+import com.example.myfilsms.domain.Film
 
 
 //в параметр передаем слушатель, чтобы мы потом могли обрабатывать нажатия из класса активити

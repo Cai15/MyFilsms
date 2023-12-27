@@ -1,10 +1,9 @@
-package com.example.myfilsms
+package com.example.myfilsms.view.rv_viewholders
 
-import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myfilsms.databinding.FilmItemBinding
-
+import com.example.myfilsms.domain.Film
 
 
 //В конструктор класс передается layout, который мы создали(film_item.xml)

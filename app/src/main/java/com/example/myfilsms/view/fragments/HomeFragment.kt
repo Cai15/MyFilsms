@@ -1,4 +1,4 @@
-package com.example.myfilsms
+package com.example.myfilsms.view.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,27 +6,44 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myfilsms.view.rv_adapters.FilmListRecyclerAdapter
+import com.example.myfilsms.R
+import com.example.myfilsms.view.rv_adapters.TopSpacingItemDecoration
 import com.example.myfilsms.databinding.FragmentHomeBinding
+import com.example.myfilsms.domain.Film
+import com.example.myfilsms.utils.AnimationHelper
+import com.example.myfilsms.view.MainActivity
+import com.example.myfilsms.viewmodel.HomeFragmentViewModel
 import java.util.Locale
 
 
 
 class HomeFragment : Fragment() {
 
+    private val viewModel by lazy {
+        ViewModelProvider.NewInstanceFactory().create(HomeFragmentViewModel::class.java)
+    }
     private lateinit var binding: FragmentHomeBinding
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
 
-    private val filmsDataBase: List<Film>
-        get() = listOf(
-            Film("1+1", R.drawable.odin_odin, "Аристократ на коляске нанимает в сиделки бывшего заключенного. Искрометная французская комедия с Омаром Си", 5.0f),
-            Film("Бойцовский коуб", R.drawable.boi_klub, "Страховой работник разрушает рутину своей благополучной жизни. Культовая драма по книге Чака Паланика", 3.0f),
-            Film("Иван Васильевич меняет профессию (1973)", R.drawable.ivan_prof, "Иван Грозный отвечает на телефон, пока его тезка-пенсионер сидит на троне. Советский хит о липовом государе", 7.0f),
-            Film("Шерлок Холмс и доктор Ватсон: Знакомство (ТВ, 1979)",R.drawable.sherlock_holms,"Увлекательные приключения самого известного сыщика всех времен",7.7f),
-            Film( "Ходячий замок (2004)", R.drawable.hodit_zamok, "Анимэ", 9.0f),
-            Film("Операция «Ы» и другие приключения Шурика (1965)", R.drawable.oper_i, "Похождения хронически оптимистичного очкарика. Блистательная комедия Леонида Гайдая",7f),
-            Film("Матрица (1999)", R.drawable.matrica, "Жизнь Томаса Андерсона разделена на две части: днём он — самый обычный офисный работник, получающий нагоняи от начальства, а ночью превращается в хакера по имени Нео, и нет места в сети, куда он бы не смог проникнуть. Но однажды всё меняется. Томас узнаёт ужасающую правду о реальности.",2.0f)
-        )
+    private var filmsDataBase = listOf<Film>()
+        //Используем backing field
+        set(value) {
+            //Если придет такое же значение то мы выходим из метода
+            if (field == value) return
+            //Если прило другое значение, то кладем его в переменную
+            field = value
+            //Обновляем RV адаптер
+            filmsAdapter.addItems(field)
+        }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance = true
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -76,7 +93,9 @@ class HomeFragment : Fragment() {
         //находим наш RV
         initRecyckler()
         //Кладем нашу БД в RV
-        filmsAdapter.addItems(filmsDataBase)
+        viewModel.filmsListLiveData.observe(viewLifecycleOwner, Observer<List<Film>> {
+            filmsDataBase = it
+        })
     }
 
 
