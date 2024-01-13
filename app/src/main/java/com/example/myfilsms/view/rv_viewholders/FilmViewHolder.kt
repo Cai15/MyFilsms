@@ -2,6 +2,7 @@ package com.example.myfilsms.view.rv_viewholders
 
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.myfilsms.data.ApiConstants
 import com.example.myfilsms.databinding.FilmItemBinding
 import com.example.myfilsms.domain.Film
 
@@ -22,7 +23,7 @@ class FilmViewHolder(private var binding: FilmItemBinding) : RecyclerView.ViewHo
         //Указываем контейнер, в которм будет "жить" наша картинка
         Glide.with(itemView)
             //Загружаем сам ресурс
-            .load(film.poster)
+            .load(ApiConstants.IMAGES_URL + "w342" + film.poster)
             //Центруем изображение
             .centerCrop()
             //Указываем ImageView, куда будем загружать изображение

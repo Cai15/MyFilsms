@@ -66,7 +66,7 @@ android {
         includeInBundle = true
         includeInApk = true
     }
-    buildToolsVersion = "33.0.1"
+    buildToolsVersion = "34.0.0"
 }
 
 dependencies {
@@ -81,14 +81,14 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     implementation("androidx.cardview:cardview:1.0.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation("androidx.activity:activity-compose:1.8.2")
 
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     //implementation("androidx.compose.ui:ui-tooling-preview")
     //implementation("androidx.compose.material3:material3")
-    implementation("com.google.android.material:material:1.12.0-alpha02")
+    implementation("com.google.android.material:material:1.12.0-alpha03")
     implementation ("androidx.viewpager2:viewpager2:1.1.0-beta02")
     implementation ("androidx.recyclerview:recyclerview:1.3.2")
     implementation ("jp.wasabeef:recyclerview-animators:4.0.2")
@@ -100,7 +100,9 @@ dependencies {
     implementation ("androidx.navigation:navigation-fragment-ktx:2.7.6")
     implementation ("androidx.navigation:navigation-ui-ktx:2.7.6")
 
+    //Glide
     implementation ("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.11.0")
 
     implementation ("com.airbnb.android:lottie:6.2.0")
 

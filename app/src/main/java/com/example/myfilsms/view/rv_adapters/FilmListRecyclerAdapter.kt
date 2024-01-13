@@ -51,7 +51,7 @@ class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) :
 
     //Метод для добавления объектов в наш список
 
-    @SuppressLint("NotifyDataSetChanged")
+
     fun addItems(list: List<Film>) {
         //Сначала очишаем(если не реализовать DiffUtils)
         items.clear()
