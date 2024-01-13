@@ -10,7 +10,7 @@ import com.example.myfilsms.viewmodel.HomeFragmentViewModel
 import retrofit2.Callback
 import retrofit2.Response
 
-class Interactor(private val repo: MainRepository, private val retrofitService: TmdbApi) {
+class Interactor(private val response: MainRepository, private val retrofitService: TmdbApi) {
     //В конструктор мы будм передавать коллбэк из вьюмоделе, чтобы реагировать на то, когда фильмы будут получены
     //и страницу, котороую нужно загрузить (это для пагинации)
     fun getFilmsFromApi(page: Int, callback: HomeFragmentViewModel.ApiCallback) {
