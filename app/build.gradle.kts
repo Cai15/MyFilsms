@@ -2,8 +2,9 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-parcelize")
-    id ("kotlin-kapt")
+    id("kotlin-kapt")
 }
+
 
 
 
@@ -29,6 +30,7 @@ android {
             useSupportLibrary = true
         }
     }
+
 
 
 
@@ -71,14 +73,15 @@ android {
     buildToolsVersion = "34.0.0"
 }
 
-dependencies {
 
+dependencies {
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.compose.material3:material3:1.1.2")
     implementation("com.android.support:support-annotations:28.0.0")
+    implementation("androidx.annotation:annotation:1.7.1")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -118,5 +121,12 @@ dependencies {
     implementation ("com.squareup.okhttp3:logging-interceptor:3.12.6")
 
     //Koin
-    implementation ("io.insert-koin:koin-android:3.5.3")
+    //implementation ("io.insert-koin:koin-android:2.0.1")
+
+    //dagger
+    implementation ("com.google.dagger:dagger:2.28.3")
+    kapt ("com.google.dagger:dagger-compiler:2.28")
+    //annotationProcessor ("com.google.dagger:dagger-compiler:2.28")
+    //annotationProcessor ("com.google.dagger:dagger-android-processor:2.2")
+
 }

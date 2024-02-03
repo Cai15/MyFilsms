@@ -22,7 +22,6 @@ import java.util.Locale
 
 
 class HomeFragment : Fragment() {
-
     private val viewModel by lazy {
         ViewModelProvider.NewInstanceFactory().create(HomeFragmentViewModel::class.java)
     }
