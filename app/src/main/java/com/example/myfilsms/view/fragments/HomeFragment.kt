@@ -10,7 +10,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myfilsms.view.rv_adapters.FilmListRecyclerAdapter
-import com.example.myfilsms.R
 import com.example.myfilsms.view.rv_adapters.TopSpacingItemDecoration
 import com.example.myfilsms.databinding.FragmentHomeBinding
 import com.example.myfilsms.domain.Film

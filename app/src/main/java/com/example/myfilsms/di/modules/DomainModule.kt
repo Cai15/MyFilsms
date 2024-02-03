@@ -1,8 +1,5 @@
 package com.example.myfilsms.di.modules
 
-
-import android.os.Parcel
-import android.os.Parcelable
 import com.example.myfilsms.data.MainRepository
 import com.example.myfilsms.data.TmdbApi
 import com.example.myfilsms.domain.Interactor
