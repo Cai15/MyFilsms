@@ -2,6 +2,7 @@ package com.example.myfilsms
 
 import android.app.Application
 import com.example.myfilsms.di.AppComponent
+import com.example.myfilsms.di.DaggerAppComponent
 
 class App : Application() {
     lateinit var dagger: AppComponent

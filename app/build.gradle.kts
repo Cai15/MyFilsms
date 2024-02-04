@@ -1,3 +1,8 @@
+@file:Suppress("DEPRECATION")
+
+import org.apache.tools.ant.util.JavaEnvUtils.VERSION_1_8
+
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -31,6 +36,9 @@ android {
         }
     }
 
+    kapt {
+        generateStubs = true
+    }
 
 
 
@@ -54,11 +62,14 @@ android {
         viewBinding = true
         compose = true
         dataBinding = true
+        prefab = true
     }
 
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.3"
+       // kotlinCompilerExtensionVersion = "1.6.3"
+        kotlinCompilerVersion = "1.5.10"
+        kotlinCompilerExtensionVersion =  "1.5.8"
     }
     packaging {
         resources {
@@ -74,24 +85,26 @@ android {
 }
 
 
+
 dependencies {
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.11.0")
+    implementation("com.google.android.material:material:1.12.0-alpha03")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.compose.material3:material3:1.1.2")
     implementation("com.android.support:support-annotations:28.0.0")
     implementation("androidx.annotation:annotation:1.7.1")
+    implementation("androidx.room:room-compiler-processing-testing:2.6.1")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
-    implementation("androidx.activity:activity-compose:1.8.2")
+    releaseImplementation("androidx.activity:activity-compose:1.8.2")
 
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-graphics")
+    implementation("androidx.compose.ui:ui:1.7.0-alpha01")
+    implementation("androidx.compose.ui:ui-graphics:1.7.0-alpha01")
     //implementation("androidx.compose.ui:ui-tooling-preview")
     //implementation("androidx.compose.material3:material3")
     implementation("com.google.android.material:material:1.12.0-alpha03")
@@ -99,8 +112,8 @@ dependencies {
     implementation ("androidx.recyclerview:recyclerview:1.3.2")
     implementation ("jp.wasabeef:recyclerview-animators:4.0.2")
     implementation ("androidx.coordinatorlayout:coordinatorlayout:1.2.0")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.10.01"))
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+    androidTestImplementation(platform("androidx.compose:compose-bom:2024.01.00"))
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.7.0-alpha01")
     //debugImplementation("androidx.compose.ui:ui-tooling")
     //debugImplementation("androidx.compose.ui:ui-test-manifest")
     implementation ("androidx.navigation:navigation-fragment-ktx:2.7.6")
@@ -108,25 +121,30 @@ dependencies {
 
     //Glide
     implementation ("com.github.bumptech.glide:glide:4.16.0")
-    annotationProcessor ("com.github.bumptech.glide:compiler:4.11.0")
+    //annotationProcessor ("com.github.bump tech.glide:compiler:4.11.0")
 
-    implementation ("com.airbnb.android:lottie:6.2.0")
+    implementation ("com.airbnb.android:lottie:6.3.0")
 
     //okHttp
-    implementation ("com.squareup.okhttp3:okhttp:3.14.9")
+    implementation ("com.squareup.okhttp3:okhttp:4.12.0")
 
     //Retrofit
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("com.squareup.retrofit2:converter-gson:2.6.0")
-    implementation ("com.squareup.okhttp3:logging-interceptor:3.12.6")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.12.0")
 
     //Koin
     //implementation ("io.insert-koin:koin-android:2.0.1")
 
     //dagger
-    implementation ("com.google.dagger:dagger:2.28.3")
-    kapt ("com.google.dagger:dagger-compiler:2.28")
-    //annotationProcessor ("com.google.dagger:dagger-compiler:2.28")
-    //annotationProcessor ("com.google.dagger:dagger-android-processor:2.2")
+    kapt ("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.9.0")
+    implementation ("com.google.dagger:dagger:2.50")
+    implementation ("com.google.dagger:dagger-android:2.50")
+    implementation ("com.google.dagger:dagger-android-support:2.50")
+    kapt ("com.google.dagger:dagger-compiler:2.50")
+    kapt ("com.google.dagger:dagger-android-processor:2.50")
 
+    //хз че это
+    //annotationProcessor ("com.google.auto.value:auto-value:1.10.4")
+    //implementation ("com.google.auto.value:auto-value-annotations:1.10.4")
 }
