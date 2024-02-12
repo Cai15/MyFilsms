@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.example.myfilsms.R
+import com.example.myfilsms.data.ApiConstants
 import com.example.myfilsms.databinding.FragmentDetailsBinding
 import com.example.myfilsms.domain.Film
 
@@ -19,14 +21,13 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
        binding = FragmentDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setFilmsDetails()
 
         binding.detailsFabFavorites.setOnClickListener {
@@ -63,7 +64,10 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         //Устанавливаем заголовок
         binding.detailsToolbar.title = film.title
         //Устанавливаем картинку
-        binding.detailsPoster.setImageResource(film.poster)
+        Glide.with(this)
+            .load(ApiConstants.IMAGES_URL + "w780" + film.poster)
+            .centerCrop()
+            .into(binding.detailsPoster)
         //Устанавливаем описание
         binding.detailsDescription.text = film.description
 

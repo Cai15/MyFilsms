@@ -16,15 +16,13 @@ import com.example.myfilsms.view.MainActivity
 
 
 class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
-
     private lateinit var binding: FragmentFavoritesBinding
-
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentFavoritesBinding.inflate(inflater, container, false)
         return binding.root
     }

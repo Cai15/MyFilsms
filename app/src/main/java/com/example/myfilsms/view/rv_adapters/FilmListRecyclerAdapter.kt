@@ -1,7 +1,7 @@
 package com.example.myfilsms.view.rv_adapters
 
 
-import android.annotation.SuppressLint
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -11,10 +11,9 @@ import com.example.myfilsms.domain.Film
 
 
 //в параметр передаем слушатель, чтобы мы потом могли обрабатывать нажатия из класса активити
-class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     //Здесь у нас хранится список элементов для RV
-    private val items = mutableListOf<Film>()
+    val items = mutableListOf<Film>()
 
     //Этот метод нужно переопределить на возврат количества елементов в списке RV
     override fun getItemCount() = items.size
@@ -51,7 +50,7 @@ class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) :
 
     //Метод для добавления объектов в наш список
 
-    @SuppressLint("NotifyDataSetChanged")
+
     fun addItems(list: List<Film>) {
         //Сначала очишаем(если не реализовать DiffUtils)
         items.clear()

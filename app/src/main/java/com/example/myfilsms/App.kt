@@ -1,27 +1,28 @@
 package com.example.myfilsms
 
 import android.app.Application
-import com.example.myfilsms.data.MainRepository
-import com.example.myfilsms.domain.Interactor
+import com.example.myfilsms.di.AppComponent
+import com.example.myfilsms.di.DaggerAppComponent
+import com.example.myfilsms.di.modules.DatabaseModule
+import com.example.myfilsms.di.modules.DomainModule
+import com.example.myfilsms.di.modules.RemoteModule
 
 class App : Application() {
-    lateinit var repo: MainRepository
-    lateinit var interactor: Interactor
+    lateinit var dagger: AppComponent
 
     override fun onCreate() {
         super.onCreate()
-        //Инициализируем экземпляр App, через который будем получать доступ к остальным переменным
         instance = this
-        //Инициализируем репозиторий
-        repo = MainRepository()
-        //Инициализируем интерактор
-        interactor = Interactor(repo)
+        //Создаем компонент
+        dagger = DaggerAppComponent.builder()
+            .remoteModule(RemoteModule())
+            .databaseModule(DatabaseModule())
+            .domainModule(DomainModule(this))
+            .build()
     }
 
     companion object {
-        //Здесь статически хранится ссылка на экземпляр App
         lateinit var instance: App
-            //Приватный сеттер, чтобы нельзя было в эту переменную присвоить что-либо другое
             private set
     }
 }

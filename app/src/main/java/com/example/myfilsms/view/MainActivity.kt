@@ -1,6 +1,6 @@
 package com.example.myfilsms.view
 
-import android.annotation.SuppressLint
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -13,6 +13,7 @@ import com.example.myfilsms.view.fragments.SelectionsFragment
 import com.example.myfilsms.view.fragments.WatchLaterFragment
 import com.example.myfilsms.databinding.ActivityMainBinding
 import com.example.myfilsms.domain.Film
+import com.example.myfilsms.view.fragments.SettingsFragment
 
 
 @Suppress("DEPRECATION")
@@ -21,9 +22,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-
-
-    @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -48,6 +46,7 @@ class MainActivity : AppCompatActivity() {
         val fragment = DetailsFragment()
         //Прикрепляем нашу "посылку" к фрагменту
         fragment.arguments = bundle
+
         //Запускаем фрагмент
         supportFragmentManager
             .beginTransaction()
@@ -105,6 +104,12 @@ class MainActivity : AppCompatActivity() {
                     changeFragment( fragment?: SelectionsFragment(), tag)
                     true
                 }
+                R.id.settings -> {
+                    val tag = "settings"
+                    val fragment = checkFragmentExistence(tag)
+                    changeFragment( fragment?: SettingsFragment(), tag)
+                    true
+                }
                 else -> false
             }
         }
@@ -120,6 +125,4 @@ class MainActivity : AppCompatActivity() {
             .addToBackStack(null)
             .commit()
     }
-
-
 }

@@ -2,11 +2,15 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-parcelize")
-    id ("kotlin-kapt")
+    id("kotlin-kapt")
 }
 
 
+
+
+
 android {
+
     namespace = "com.example.myfilsms"
     compileSdk = 34
 
@@ -26,6 +30,13 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+    }
+
+
+    kapt {
+        generateStubs = true
+        correctErrorTypes = true
     }
 
 
@@ -50,11 +61,14 @@ android {
         viewBinding = true
         compose = true
         dataBinding = true
+        prefab = true
     }
 
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.3"
+       // kotlinCompilerExtensionVersion = "1.6.3"
+        //kotlinCompilerVersion = "1.5.3"
+        kotlinCompilerExtensionVersion =  "1.5.0"
     }
     packaging {
         resources {
@@ -66,41 +80,70 @@ android {
         includeInBundle = true
         includeInApk = true
     }
-    buildToolsVersion = "33.0.1"
+    buildToolsVersion = "34.0.0"
 }
 
-dependencies {
 
+
+
+
+dependencies {
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.11.0")
+    implementation("com.google.android.material:material:1.12.0-alpha03")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.compose.material3:material3:1.1.2")
+    implementation("com.android.support:support-annotations:28.0.0")
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+    //implementation("androidx.annotation:annotation:1.7.1")
+    annotationProcessor("androidx.room:room-compiler-processing-testing:2.6.1")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     implementation("androidx.cardview:cardview:1.0.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation("androidx.activity:activity-compose:1.8.2")
 
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-graphics")
-    //implementation("androidx.compose.ui:ui-tooling-preview")
-    //implementation("androidx.compose.material3:material3")
-    implementation("com.google.android.material:material:1.12.0-alpha02")
+    implementation("androidx.compose.ui:ui:1.7.0-alpha01")
+    implementation("androidx.compose.ui:ui-graphics:1.7.0-alpha01")
+    implementation("androidx.compose.ui:ui-tooling-preview")
+    implementation("androidx.compose.material3:material3:1.2.0-rc01")
+    implementation("com.google.android.material:material:1.12.0-alpha03")
     implementation ("androidx.viewpager2:viewpager2:1.1.0-beta02")
     implementation ("androidx.recyclerview:recyclerview:1.3.2")
     implementation ("jp.wasabeef:recyclerview-animators:4.0.2")
     implementation ("androidx.coordinatorlayout:coordinatorlayout:1.2.0")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.10.01"))
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-    //debugImplementation("androidx.compose.ui:ui-tooling")
-    //debugImplementation("androidx.compose.ui:ui-test-manifest")
+    androidTestImplementation(platform("androidx.compose:compose-bom:2024.01.00"))
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.7.0-alpha01")
+    debugImplementation("androidx.compose.ui:ui-tooling")
+    debugImplementation("androidx.compose.ui:ui-test-manifest")
     implementation ("androidx.navigation:navigation-fragment-ktx:2.7.6")
     implementation ("androidx.navigation:navigation-ui-ktx:2.7.6")
 
+    //Glide
     implementation ("com.github.bumptech.glide:glide:4.16.0")
+    //annotationProcessor ("com.github.bump tech.glide:compiler:4.11.0")
 
-    implementation ("com.airbnb.android:lottie:6.2.0")
+    implementation ("com.airbnb.android:lottie:6.3.0")
+
+    //okHttp
+    implementation ("com.squareup.okhttp3:okhttp:4.12.0")
+
+    //Retrofit
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.12.0")
+
+    //dagger
+    kapt ("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.9.0")
+    implementation ("com.google.dagger:dagger:2.50")
+    implementation ("com.google.dagger:dagger-android:2.50")
+    implementation ("com.google.dagger:dagger-android-support:2.50")
+    kapt ("com.google.dagger:dagger-compiler:2.50")
+    kapt ("com.google.dagger:dagger-android-processor:2.50")
+
+    //хз че это
+    //annotationProcessor ("com.google.auto.value:auto-value:1.10.4")
+    //implementation ("com.google.auto.value:auto-value-annotations:1.10.4")
 }
