@@ -5,7 +5,6 @@ import com.example.myfilsms.data.MainRepository
 import com.example.myfilsms.data.TmdbApi
 import com.example.myfilsms.data.preferenes.PreferenceProvider
 import com.example.myfilsms.domain.Interactor
-import com.example.myfilsms.App
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
