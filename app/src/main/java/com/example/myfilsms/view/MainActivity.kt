@@ -13,6 +13,7 @@ import com.example.myfilsms.view.fragments.SelectionsFragment
 import com.example.myfilsms.view.fragments.WatchLaterFragment
 import com.example.myfilsms.databinding.ActivityMainBinding
 import com.example.myfilsms.domain.Film
+import com.example.myfilsms.view.fragments.SettingsFragment
 
 
 @Suppress("DEPRECATION")
@@ -101,6 +102,12 @@ class MainActivity : AppCompatActivity() {
                     val tag = "selections"
                     val fragment = checkFragmentExistence(tag)
                     changeFragment( fragment?: SelectionsFragment(), tag)
+                    true
+                }
+                R.id.settings -> {
+                    val tag = "settings"
+                    val fragment = checkFragmentExistence(tag)
+                    changeFragment( fragment?: SettingsFragment(), tag)
                     true
                 }
                 else -> false

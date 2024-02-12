@@ -94,6 +94,7 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.compose.material3:material3:1.1.2")
     implementation("com.android.support:support-annotations:28.0.0")
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     //implementation("androidx.annotation:annotation:1.7.1")
     annotationProcessor("androidx.room:room-compiler-processing-testing:2.6.1")
     testImplementation("junit:junit:4.13.2")
