@@ -37,6 +37,7 @@ android {
     kapt {
         generateStubs = true
         correctErrorTypes = true
+        arguments {arg("room.schemaLocation", "$projectDir/schemas")}
     }
 
 
@@ -92,10 +93,10 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.12.0-alpha03")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("androidx.compose.material3:material3:1.1.2")
+    implementation("androidx.compose.material3:material3:1.2.0")
     implementation("com.android.support:support-annotations:28.0.0")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
-    //implementation("androidx.annotation:annotation:1.7.1")
+
     annotationProcessor("androidx.room:room-compiler-processing-testing:2.6.1")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
@@ -105,21 +106,21 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation("androidx.activity:activity-compose:1.8.2")
 
-    implementation("androidx.compose.ui:ui:1.7.0-alpha01")
-    implementation("androidx.compose.ui:ui-graphics:1.7.0-alpha01")
+    implementation("androidx.compose.ui:ui:1.7.0-alpha03")
+    implementation("androidx.compose.ui:ui-graphics:1.7.0-alpha03")
     implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3:1.2.0-rc01")
+    implementation("androidx.compose.material3:material3:1.2.0")
     implementation("com.google.android.material:material:1.12.0-alpha03")
     implementation ("androidx.viewpager2:viewpager2:1.1.0-beta02")
     implementation ("androidx.recyclerview:recyclerview:1.3.2")
     implementation ("jp.wasabeef:recyclerview-animators:4.0.2")
     implementation ("androidx.coordinatorlayout:coordinatorlayout:1.2.0")
     androidTestImplementation(platform("androidx.compose:compose-bom:2024.01.00"))
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.7.0-alpha01")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.7.0-alpha03")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
-    implementation ("androidx.navigation:navigation-fragment-ktx:2.7.6")
-    implementation ("androidx.navigation:navigation-ui-ktx:2.7.6")
+    implementation ("androidx.navigation:navigation-fragment-ktx:2.7.7")
+    implementation ("androidx.navigation:navigation-ui-ktx:2.7.7")
 
     //Glide
     implementation ("com.github.bumptech.glide:glide:4.16.0")
@@ -143,7 +144,10 @@ dependencies {
     kapt ("com.google.dagger:dagger-compiler:2.50")
     kapt ("com.google.dagger:dagger-android-processor:2.50")
 
-    //хз че это
-    //annotationProcessor ("com.google.auto.value:auto-value:1.10.4")
-    //implementation ("com.google.auto.value:auto-value-annotations:1.10.4")
+    //Room
+    implementation ("androidx.room:room-runtime:2.5.0") // Библиотека "Room"
+    kapt ("androidx.room:room-compiler:2.5.0") // Кодогенератор
+    implementation ("androidx.room:room-ktx:2.5.0") // Дополнительно для Kotlin Coroutines, Kotlin Flows
+
+
 }

@@ -3,7 +3,7 @@ package com.example.myfilsms.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.myfilsms.App
-import com.example.myfilsms.domain.Film
+import com.example.myfilsms.data.Enity.Film
 import com.example.myfilsms.domain.Interactor
 import javax.inject.Inject
 

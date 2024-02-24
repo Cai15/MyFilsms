@@ -12,7 +12,7 @@ import com.example.myfilsms.R
 import com.example.myfilsms.view.fragments.SelectionsFragment
 import com.example.myfilsms.view.fragments.WatchLaterFragment
 import com.example.myfilsms.databinding.ActivityMainBinding
-import com.example.myfilsms.domain.Film
+import com.example.myfilsms.data.Enity.Film
 import com.example.myfilsms.view.fragments.SettingsFragment
 
 

@@ -1,4 +1,4 @@
-package com.example.myfilsms.domain
+package com.example.myfilsms.data.Enity
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

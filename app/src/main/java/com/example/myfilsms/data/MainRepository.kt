@@ -3,7 +3,7 @@ package com.example.myfilsms.data
 import android.content.ContentValues
 import android.database.Cursor
 import com.example.myfilsms.data.db.DatabaseHelper
-import com.example.myfilsms.domain.Film
+import com.example.myfilsms.data.Enity.Film
 
 class MainRepository(databaseHelper: DatabaseHelper) {
     //Инициализируем объект для взаимодействия с БД
