@@ -2,7 +2,7 @@ package com.example.myfilsms.data
 
 
 
-import com.example.myfilsms.data.Enity.TmdbResults
+import com.example.myfilsms.data.entity.TmdbResults
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

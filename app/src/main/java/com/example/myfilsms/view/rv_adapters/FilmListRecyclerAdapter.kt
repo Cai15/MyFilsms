@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myfilsms.view.rv_viewholders.FilmViewHolder
 import com.example.myfilsms.databinding.FilmItemBinding
-import com.example.myfilsms.data.Enity.Film
+import com.example.myfilsms.data.entity.Film
 
 
 //в параметр передаем слушатель, чтобы мы потом могли обрабатывать нажатия из класса активити

@@ -1,4 +1,4 @@
-package com.example.myfilsms.data.Enity
+package com.example.myfilsms.data.entity
 
 import com.google.gson.annotations.SerializedName
 

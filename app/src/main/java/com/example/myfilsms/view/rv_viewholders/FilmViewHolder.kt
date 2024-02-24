@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myfilsms.data.ApiConstants
 import com.example.myfilsms.databinding.FilmItemBinding
-import com.example.myfilsms.data.Enity.Film
+import com.example.myfilsms.data.entity.Film
 
 
 //В конструктор класс передается layout, который мы создали(film_item.xml)

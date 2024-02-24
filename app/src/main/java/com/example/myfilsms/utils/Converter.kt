@@ -1,7 +1,7 @@
 package com.example.myfilsms.utils
 
-import com.example.myfilsms.data.Enity.TmdbFilm
-import com.example.myfilsms.data.Enity.Film
+import com.example.myfilsms.data.entity.TmdbFilm
+import com.example.myfilsms.data.entity.Film
 
 object Converter {
     fun convertApiListToDTOList(list: List<TmdbFilm>?): List<Film> {

@@ -115,10 +115,10 @@ dependencies {
     implementation ("androidx.recyclerview:recyclerview:1.3.2")
     implementation ("jp.wasabeef:recyclerview-animators:4.0.2")
     implementation ("androidx.coordinatorlayout:coordinatorlayout:1.2.0")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2024.01.00"))
+    androidTestImplementation(platform("androidx.compose:compose-bom:2024.02.01"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.7.0-alpha03")
     debugImplementation("androidx.compose.ui:ui-tooling")
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
+    debugImplementation("androidx.compose.ui:ui-test-manifest:1.7.0-alpha03")
     implementation ("androidx.navigation:navigation-fragment-ktx:2.7.7")
     implementation ("androidx.navigation:navigation-ui-ktx:2.7.7")
 
@@ -145,9 +145,9 @@ dependencies {
     kapt ("com.google.dagger:dagger-android-processor:2.50")
 
     //Room
-    implementation ("androidx.room:room-runtime:2.5.0") // Библиотека "Room"
-    kapt ("androidx.room:room-compiler:2.5.0") // Кодогенератор
-    implementation ("androidx.room:room-ktx:2.5.0") // Дополнительно для Kotlin Coroutines, Kotlin Flows
+    implementation ("androidx.room:room-runtime:2.6.1") // Библиотека "Room"
+    kapt ("androidx.room:room-compiler:2.6.1") // Кодогенератор
+    implementation ("androidx.room:room-ktx:2.6.1") // Дополнительно для Kotlin Coroutines, Kotlin Flows
 
 
 }
