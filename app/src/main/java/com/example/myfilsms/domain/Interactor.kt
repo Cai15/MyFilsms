@@ -1,5 +1,6 @@
 package com.example.myfilsms.domain
 
+import androidx.lifecycle.LiveData
 import retrofit2.Call
 import com.example.myfilsms.data.API
 import com.example.myfilsms.data.entity.Film
@@ -23,7 +24,7 @@ class Interactor(private val repo: MainRepository, private val retrofitService: 
                 list.forEach {
                     repo.putToDb(list)
                 }
-                callback.onSuccess(list)
+                callback.onSuccess()
             }
 
             override fun onFailure(call: Call<TmdbResults>, t: Throwable) {
@@ -39,5 +40,5 @@ class Interactor(private val repo: MainRepository, private val retrofitService: 
     //Метод для получения настроек
     fun getDefaultCategoryFromPreferences() = preferences.geDefaultCategory()
 
-    fun getFilmsFromDB(): List<Film> = repo.getAllFromDB()
+    fun getFilmsFromDB(): LiveData<List<Film>> = repo.getAllFromDB()
 }
