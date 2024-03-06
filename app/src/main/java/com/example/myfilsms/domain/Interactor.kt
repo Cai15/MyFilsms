@@ -1,8 +1,10 @@
 package com.example.myfilsms.domain
 
+import androidx.lifecycle.LiveData
 import retrofit2.Call
 import com.example.myfilsms.data.API
-import com.example.myfilsms.data.Enity.TmdbResults
+import com.example.myfilsms.data.entity.Film
+import com.example.myfilsms.data.entity.TmdbResults
 import com.example.myfilsms.data.MainRepository
 import com.example.myfilsms.data.TmdbApi
 import com.example.myfilsms.data.preferenes.PreferenceProvider
@@ -17,7 +19,12 @@ class Interactor(private val repo: MainRepository, private val retrofitService: 
         retrofitService.getFilms(getDefaultCategoryFromPreferences(), API.KEY, "ru-RU", page).enqueue(object : Callback<TmdbResults> {
             override fun onResponse(call: Call<TmdbResults>, response: Response<TmdbResults>) {
                 //При успехе мы вызываем метод передаем onSuccess и в этот коллбэк список фильмов
-                callback.onSuccess(Converter.convertApiListToDTOList(response.body()?.tmdbFilms))
+                val list = Converter.convertApiListToDTOList(response.body()?.tmdbFilms)
+                //Кладем фильмы в бд
+                list.forEach {
+                    repo.putToDb(list)
+                }
+                callback.onSuccess()
             }
 
             override fun onFailure(call: Call<TmdbResults>, t: Throwable) {
@@ -32,4 +39,6 @@ class Interactor(private val repo: MainRepository, private val retrofitService: 
     }
     //Метод для получения настроек
     fun getDefaultCategoryFromPreferences() = preferences.geDefaultCategory()
+
+    fun getFilmsFromDB(): LiveData<List<Film>> = repo.getAllFromDB()
 }

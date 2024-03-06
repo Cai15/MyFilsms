@@ -10,7 +10,7 @@ import com.example.myfilsms.view.rv_adapters.FilmListRecyclerAdapter
 import com.example.myfilsms.R
 import com.example.myfilsms.view.rv_adapters.TopSpacingItemDecoration
 import com.example.myfilsms.databinding.FragmentFavoritesBinding
-import com.example.myfilsms.domain.Film
+import com.example.myfilsms.data.entity.Film
 import com.example.myfilsms.utils.AnimationHelper
 import com.example.myfilsms.view.MainActivity
 

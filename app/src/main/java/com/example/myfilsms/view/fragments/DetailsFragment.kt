@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.example.myfilsms.R
 import com.example.myfilsms.data.ApiConstants
 import com.example.myfilsms.databinding.FragmentDetailsBinding
-import com.example.myfilsms.domain.Film
+import com.example.myfilsms.data.entity.Film
 
 
 class DetailsFragment : Fragment(R.layout.fragment_details) {
