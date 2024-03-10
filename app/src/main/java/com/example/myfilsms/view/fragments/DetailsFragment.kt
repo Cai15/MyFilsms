@@ -1,7 +1,9 @@
 package com.example.myfilsms.view.fragments
 
+import android.Manifest
 import android.content.ContentValues
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
@@ -9,21 +11,20 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.bumptech.glide.Glide
+import com.example.myfilsms.data.entity.Film
 import com.example.myfilsms.R
 import com.example.myfilsms.data.ApiConstants
 import com.example.myfilsms.databinding.FragmentDetailsBinding
-import com.example.myfilsms.data.entity.Film
+import com.example.myfilsms.viewmodel.DetailsFragmentViewModel
+import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.async
-import java.util.jar.Manifest
+import kotlinx.coroutines.*
 
 
 class DetailsFragment : Fragment(R.layout.fragment_details) {
@@ -183,7 +184,9 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
             //Открываем канал для записи на диск
             val outputStream = contentResolver.openOutputStream(uri!!)
             //Передаем нашу картинку, может сделать компрессию
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+            if (outputStream != null) {
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+            }
             //Закрываем поток
             outputStream?.close()
         } else {
@@ -201,4 +204,4 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
     private fun String.handleSingleQuote(): String {
         return this.replace("'", "")
     }
-}}
+}

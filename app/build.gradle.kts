@@ -94,7 +94,7 @@ dependencies {
     implementation("com.google.android.material:material:1.12.0-alpha03")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.compose.material3:material3:1.2.0")
-    implementation("com.android.support:support-annotations:28.0.0")
+    //implementation("com.android.support:support-annotations:28.0.0")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 
     annotationProcessor("androidx.room:room-compiler-processing-testing:2.6.1")
@@ -148,6 +148,10 @@ dependencies {
     implementation ("androidx.room:room-runtime:2.6.1") // Библиотека "Room"
     kapt ("androidx.room:room-compiler:2.6.1") // Кодогенератор
     implementation ("androidx.room:room-ktx:2.6.1") // Дополнительно для Kotlin Coroutines, Kotlin Flows
+
+    //Coroutines
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2")
 
 
 }
