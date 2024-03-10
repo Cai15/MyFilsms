@@ -158,47 +158,36 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
 
     private fun saveToGallery(bitmap: Bitmap) {
         //Проверяем версию системы
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            //Создаем объект для передачи данных
-            val contentValues = ContentValues().apply {
-                //Составляем информацию для файла(имя, тип, дата создания, куда сохранять и т.д.)
-                put(MediaStore.Images.Media.TITLE, film.title.handleSingleQuote())
-                put(
-                    MediaStore.Images.Media.DISPLAY_NAME,
-                    film.title.handleSingleQuote()
-                )
-                put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
-                put(
-                    MediaStore.Images.Media.DATE_ADDED,
-                    System.currentTimeMillis() / 1000
-                )
-                put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis())
-                put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/FilmsSearchApp")
-            }
-            //Получаем ссылку на объект Content resolver, которые помогает передвать информацию из приложения во вне
-            val contentResolver = requireActivity().contentResolver
-            val uri = contentResolver.insert(
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                contentValues
+        //Создаем объект для передачи данных
+        val contentValues = ContentValues().apply {
+            //Составляем информацию для файла(имя, тип, дата создания, куда сохранять и т.д.)
+            put(MediaStore.Images.Media.TITLE, film.title.handleSingleQuote())
+            put(
+                MediaStore.Images.Media.DISPLAY_NAME,
+                film.title.handleSingleQuote()
             )
-            //Открываем канал для записи на диск
-            val outputStream = contentResolver.openOutputStream(uri!!)
-            //Передаем нашу картинку, может сделать компрессию
-            if (outputStream != null) {
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
-            }
-            //Закрываем поток
-            outputStream?.close()
-        } else {
-            //Тоже, но для более старых версий ОС
-            @Suppress("DEPRECATION")
-            MediaStore.Images.Media.insertImage(
-                requireActivity().contentResolver,
-                bitmap,
-                film.title.handleSingleQuote(),
-                film.description.handleSingleQuote()
+            put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
+            put(
+                MediaStore.Images.Media.DATE_ADDED,
+                System.currentTimeMillis() / 1000
             )
+            put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis())
+            put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/FilmsSearchApp")
         }
+        //Получаем ссылку на объект Content resolver, которые помогает передвать информацию из приложения во вне
+        val contentResolver = requireActivity().contentResolver
+        val uri = contentResolver.insert(
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+            contentValues
+        )
+        //Открываем канал для записи на диск
+        val outputStream = contentResolver.openOutputStream(uri!!)
+        //Передаем нашу картинку, может сделать компрессию
+        if (outputStream != null) {
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+        }
+        //Закрываем поток
+        outputStream?.close()
     }
 
     private fun String.handleSingleQuote(): String {
