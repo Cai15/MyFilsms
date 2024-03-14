@@ -29,9 +29,7 @@ import kotlinx.coroutines.*
 
 class DetailsFragment : Fragment(R.layout.fragment_details) {
     private lateinit var binding: FragmentDetailsBinding
-
     private lateinit var film: Film
-
     private val viewModel: DetailsFragmentViewModel by viewModels()
     private val scope = CoroutineScope(Dispatchers.IO)
     override fun onCreateView(
@@ -147,6 +145,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         )
         return result == PackageManager.PERMISSION_GRANTED
     }
+
     //Запрашиваем разрешение
     private fun requestPermission() {
         ActivityCompat.requestPermissions(
@@ -158,6 +157,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
 
     private fun saveToGallery(bitmap: Bitmap) {
         //Проверяем версию системы
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
         //Создаем объект для передачи данных
         val contentValues = ContentValues().apply {
             //Составляем информацию для файла(имя, тип, дата создания, куда сохранять и т.д.)
@@ -183,14 +183,22 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         //Открываем канал для записи на диск
         val outputStream = contentResolver.openOutputStream(uri!!)
         //Передаем нашу картинку, может сделать компрессию
-        if (outputStream != null) {
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
-        }
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream!!)
         //Закрываем поток
         outputStream?.close()
+        } else {
+        //Тоже, но для более старых версий ОС
+        @Suppress("DEPRECATION")
+        MediaStore.Images.Media.insertImage(
+            requireActivity().contentResolver,
+            bitmap,
+            film.title.handleSingleQuote(),
+            film.description.handleSingleQuote()
+        )
     }
+}
 
-    private fun String.handleSingleQuote(): String {
+private fun String.handleSingleQuote(): String {
         return this.replace("'", "")
     }
 }
