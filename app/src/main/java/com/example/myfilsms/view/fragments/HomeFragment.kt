@@ -14,9 +14,15 @@ import com.example.myfilsms.data.entity.Film
 import com.example.myfilsms.view.rv_adapters.TopSpacingItemDecoration
 import com.example.myfilsms.databinding.FragmentHomeBinding
 import com.example.myfilsms.utils.AnimationHelper
+import com.example.myfilsms.utils.AutoDisposable
+import com.example.myfilsms.utils.addTo
 import com.example.myfilsms.view.MainActivity
 import com.example.myfilsms.view.rv_adapters.FilmListRecyclerAdapter
 import com.example.myfilsms.viewmodel.HomeFragmentViewModel
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.CoroutineScope
+
 import java.util.*
 
 
@@ -25,8 +31,12 @@ class HomeFragment : Fragment() {
     private val viewModel by lazy {
         ViewModelProvider.NewInstanceFactory().create(HomeFragmentViewModel::class.java)
     }
+    private val autoDisposable = AutoDisposable()
+
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
     private lateinit var binding: FragmentHomeBinding
+    //private lateinit var scope: CoroutineScope
+
     private var filmsDataBase = listOf<Film>()
         //Используем backing field
         set(value) {
@@ -40,6 +50,7 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        autoDisposable.bindTo(lifecycle)
         retainInstance = true
     }
 
@@ -61,14 +72,22 @@ class HomeFragment : Fragment() {
         //находим наш RV
         initRecyckler()
         //Кладем нашу БД в RV
-        viewModel.filmsListLiveData.observe(viewLifecycleOwner, Observer<List<Film>> {
-            filmsDataBase = it
-            filmsAdapter.addItems(it)
-        })
-        viewModel.showProgressBar.observe(viewLifecycleOwner, Observer<Boolean> {
-            binding.progressBar.isVisible = it
-        })
 
+        viewModel.filmsListData
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { list ->
+                filmsAdapter.addItems(list)
+                filmsDataBase = list
+            }
+            .addTo(autoDisposable)
+        viewModel.showProgressBar
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                binding.progressBar.isVisible = it
+            }
+            .addTo(autoDisposable)
     }
 
     private fun initPullToRefresh() {
@@ -134,6 +153,7 @@ class HomeFragment : Fragment() {
     }
 
 }
+
 
 
 
