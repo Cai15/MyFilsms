@@ -186,6 +186,8 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream!!)
         //Закрываем поток
         outputStream?.close()
+
+
         } else {
         //Тоже, но для более старых версий ОС
         @Suppress("DEPRECATION")
