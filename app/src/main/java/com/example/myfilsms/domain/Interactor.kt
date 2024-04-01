@@ -1,6 +1,6 @@
 package com.example.myfilsms.domain
 
-import androidx.lifecycle.LiveData
+
 import retrofit2.Call
 import com.example.myfilsms.data.API
 import com.example.myfilsms.data.entity.Film
@@ -9,16 +9,10 @@ import com.example.myfilsms.data.MainRepository
 import com.example.myfilsms.data.TmdbApi
 import com.example.myfilsms.data.preferenes.PreferenceProvider
 import com.example.myfilsms.utils.Converter
-import com.example.myfilsms.viewmodel.HomeFragmentViewModel
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import io.reactivex.rxjava3.subjects.BehaviorSubject
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.launch
 import retrofit2.Callback
 import retrofit2.Response
 
@@ -48,6 +42,11 @@ class Interactor(private val repo: MainRepository, private val retrofitService: 
             }
         })
     }
+
+    fun getSearchResultFromApi(search: String): Observable<List<Film>> = retrofitService.getFilmFromSearch(API.KEY, "ru-RU", search, 1)
+        .map {
+            Converter.convertApiListToDTOList(it.tmdbFilms)
+        }
 
     //Метод для сохранения настроек
     fun saveDefaultCategoryToPreferences(category: String) {

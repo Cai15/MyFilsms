@@ -5,6 +5,7 @@ import com.example.myfilsms.data.ApiConstants
 import com.example.myfilsms.data.TmdbApi
 import dagger.Module
 import dagger.Provides
+import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
 import jp.wasabeef.recyclerview.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -36,6 +37,8 @@ class RemoteModule {
         .baseUrl(ApiConstants.BASE_URL)
         //Добавляем конвертер
         .addConverterFactory(GsonConverterFactory.create())
+        //Добавляем поддержку RxJava
+        .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
         //Добавляем кастомный клиент
         .client(okHttpClient)
         .build()

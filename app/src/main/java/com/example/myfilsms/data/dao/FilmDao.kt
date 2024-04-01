@@ -7,7 +7,6 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.myfilsms.data.entity.Film
 import io.reactivex.rxjava3.core.Observable
-import kotlinx.coroutines.flow.Flow
 
 //Помечаем, что это не просто интерфейс а Dao объект
 @Dao

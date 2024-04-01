@@ -5,6 +5,7 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
+
 //Наследуем от LifecycleObserver
 class AutoDisposable : LifecycleObserver {
     //Используем CompositeDisposable, для отмены всех Observable

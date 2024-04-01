@@ -15,10 +15,9 @@ import com.example.myfilsms.utils.AnimationHelper
 import com.example.myfilsms.view.MainActivity
 
 
-class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
-    private lateinit var binding: FragmentFavoritesBinding
+class FavoritesFragment : Fragment() {
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
-
+    private lateinit var binding: FragmentFavoritesBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
