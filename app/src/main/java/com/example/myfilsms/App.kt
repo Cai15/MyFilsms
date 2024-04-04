@@ -5,7 +5,6 @@ import com.example.myfilsms.di.AppComponent
 import com.example.myfilsms.di.DaggerAppComponent
 import com.example.myfilsms.di.modules.DatabaseModule
 import com.example.myfilsms.di.modules.DomainModule
-import com.example.myfilsms.di.modules.RemoteModule
 
 class App : Application() {
     lateinit var dagger: AppComponent
@@ -14,8 +13,9 @@ class App : Application() {
         super.onCreate()
         instance = this
         //Создаем компонент
+        val remoteProvider = DaggerRemoteComponent.create()
         dagger = DaggerAppComponent.builder()
-            .remoteModule(RemoteModule())
+            .remoteProvider(remoteProvider)
             .databaseModule(DatabaseModule())
             .domainModule(DomainModule(this))
             .build()

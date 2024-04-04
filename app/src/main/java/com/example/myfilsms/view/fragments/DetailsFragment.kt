@@ -11,7 +11,6 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -19,7 +18,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.myfilsms.data.entity.Film
 import com.example.myfilsms.R
-import com.example.myfilsms.data.ApiConstants
 import com.example.myfilsms.databinding.FragmentDetailsBinding
 import com.example.myfilsms.viewmodel.DetailsFragmentViewModel
 import com.bumptech.glide.Glide

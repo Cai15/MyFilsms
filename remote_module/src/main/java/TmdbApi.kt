@@ -1,14 +1,9 @@
-package com.example.myfilsms.data
+package ru.MyFilsms.remote_module
 
-
-
-import com.example.myfilsms.data.entity.TmdbResults
 import io.reactivex.rxjava3.core.Observable
-import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
-
 
 interface TmdbApi {
     @GET("3/movie/{category}")
@@ -17,7 +12,7 @@ interface TmdbApi {
         @Query("api_key") apiKey: String,
         @Query("language") language: String,
         @Query("page") page: Int
-    ): Call<TmdbResults>
+    ): Observable<TmdbResults>
 
     @GET("3/search/movie")
     fun getFilmFromSearch(

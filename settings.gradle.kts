@@ -17,3 +17,4 @@ dependencyResolutionManagement {
 rootProject.name = "MyFilsms"
 include(":app")
 include(":app:remote_module")
+include(":remote_module")

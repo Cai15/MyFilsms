@@ -1,4 +1,4 @@
-package com.example.myfilsms.data.entity
+package ru.MyFilsms.remote_module.entity
 
 import com.google.gson.annotations.SerializedName
 

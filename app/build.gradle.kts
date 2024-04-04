@@ -1,9 +1,13 @@
+import java.lang.ProcessBuilder.Redirect.from
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-parcelize")
     id("kotlin-kapt")
 }
+
+
 
 
 
@@ -96,6 +100,7 @@ dependencies {
     implementation("androidx.compose.material3:material3:1.2.1")
     //implementation("com.android.support:support-annotations:28.0.0")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+    implementation(project(":remote_module"))
 
     annotationProcessor("androidx.room:room-compiler-processing-testing:2.6.1")
     testImplementation("junit:junit:4.13.2")
@@ -106,19 +111,19 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation("androidx.activity:activity-compose:1.8.2")
 
-    implementation("androidx.compose.ui:ui:1.7.0-alpha04")
-    implementation("androidx.compose.ui:ui-graphics:1.7.0-alpha04")
+    implementation("androidx.compose.ui:ui:1.7.0-alpha05")
+    implementation("androidx.compose.ui:ui-graphics:1.7.0-alpha05")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3:1.2.1")
-    implementation("com.google.android.material:material:1.12.0-alpha03")
+    implementation("com.google.android.material:material:1.12.0-beta01")
     implementation ("androidx.viewpager2:viewpager2:1.1.0-beta02")
     implementation ("androidx.recyclerview:recyclerview:1.3.2")
     implementation ("jp.wasabeef:recyclerview-animators:4.0.2")
     implementation ("androidx.coordinatorlayout:coordinatorlayout:1.2.0")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2024.02.02"))
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.7.0-alpha04")
+    androidTestImplementation(platform("androidx.compose:compose-bom:2024.04.00"))
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.7.0-alpha05")
     debugImplementation("androidx.compose.ui:ui-tooling")
-    debugImplementation("androidx.compose.ui:ui-test-manifest:1.7.0-alpha04")
+    debugImplementation("androidx.compose.ui:ui-test-manifest:1.7.0-alpha05")
     implementation ("androidx.navigation:navigation-fragment-ktx:2.7.7")
     implementation ("androidx.navigation:navigation-ui-ktx:2.7.7")
 
@@ -146,6 +151,7 @@ dependencies {
 
     //Room
     implementation ("androidx.room:room-runtime:2.6.1") // Библиотека "Room"
+    //noinspection KaptUsageInsteadOfKsp
     kapt ("androidx.room:room-compiler:2.6.1") // Кодогенератор
     implementation ("androidx.room:room-ktx:2.6.1") // Дополнительно для Kotlin Coroutines, Kotlin Flows
 
