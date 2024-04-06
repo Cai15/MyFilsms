@@ -1,5 +1,6 @@
 package com.example.myfilsms.utils
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.view.View
 import android.view.ViewAnimationUtils
@@ -16,6 +17,7 @@ object AnimationHelper {
     //и объектом анимации
     //2 - активити для того, чтобы вернуть выполнение нового треда в UI поток
     //3 - позиция в меню навигации, чтобы круг проявления расходился именно от иконки меню навигации
+    @SuppressLint("NewApi")
     fun performFragmentCircularRevealAnimation(rootView: View, activity: Activity, position: Int) {
         //Создаем новый тред
         Executors.newSingleThreadExecutor().execute {

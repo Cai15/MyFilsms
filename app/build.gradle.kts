@@ -15,12 +15,13 @@ apply(from = "D:\\Ucheba\\MyFilsms\\versions.gradle.kt")
 android {
 
     namespace = "com.example.myfilsms"
-    compileSdk = 31
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.myfilsms"
         minSdk = 31
-        targetSdk = 31
+        //noinspection OldTargetApi,EditedTargetSdkVersion
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -70,8 +71,6 @@ android {
 
 
     composeOptions {
-       // kotlinCompilerExtensionVersion = "1.6.3"
-        //kotlinCompilerVersion = "1.5.3"
         kotlinCompilerExtensionVersion =  "1.5.0"
     }
     packaging {
@@ -92,12 +91,11 @@ android {
 
 
 dependencies {
-    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.core:core-ktx:1.13.0-beta01")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.12.0-beta01")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.compose.material3:material3:1.2.1")
-    //implementation("com.android.support:support-annotations:28.0.0")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation(project(":remote_module"))
 
@@ -128,7 +126,7 @@ dependencies {
 
     //Glide
     implementation ("com.github.bumptech.glide:glide:4.16.0")
-    //annotationProcessor ("com.github.bump tech.glide:compiler:4.11.0")
+
 
     implementation ("com.airbnb.android:lottie:6.4.0")
 

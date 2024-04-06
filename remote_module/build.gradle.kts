@@ -1,23 +1,24 @@
-@file:Suppress("UNUSED_EXPRESSION")
+
 
 plugins {
     id ("com.android.library")
     id ("kotlin-android")
     id ("kotlin-kapt")
 }
-apply(from = "$project.rootDir//versions.gradle")
+apply(from = "D:\\Ucheba\\MyFilsms\\versions.gradle.kt")
 
 
 
 android {
     namespace = "com.example.remote_module"
-    compileSdk = 31
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 31
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+        targetSdk = 34
     }
 
     buildTypes {

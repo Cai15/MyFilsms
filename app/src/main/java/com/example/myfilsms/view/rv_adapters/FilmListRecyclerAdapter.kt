@@ -5,10 +5,10 @@ package com.example.myfilsms.view.rv_adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myfilsms.R
 import com.example.myfilsms.view.rv_viewholders.FilmViewHolder
 import com.example.myfilsms.databinding.FilmItemBinding
 import com.example.myfilsms.data.entity.Film
-
 
 //в параметр передаем слушатель, чтобы мы потом могли обрабатывать нажатия из класса активити
 class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -20,14 +20,7 @@ class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) : 
 
     //В этом методе мы привязываем наш view holder и передаем туда "надутую" верстку нашего фильма
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val viewHolder = FilmViewHolder(
-            FilmItemBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-        )
-        return viewHolder
+        return FilmViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.film_item, parent, false))
     }
 
     //В этом методе будет привзяка полей из объекта Film, к view из film_item.xml
@@ -49,8 +42,6 @@ class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) : 
     }
 
     //Метод для добавления объектов в наш список
-
-
     fun addItems(list: List<Film>) {
         //Сначала очишаем(если не реализовать DiffUtils)
         items.clear()
