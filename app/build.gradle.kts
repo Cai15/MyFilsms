@@ -6,6 +6,7 @@ plugins {
     id("kotlin-parcelize")
     id("kotlin-kapt")
 }
+apply from: "$project.rootDir/versions.gradle"
 
 
 
@@ -168,6 +169,9 @@ dependencies {
     implementation ("io.reactivex.rxjava3:rxjava:3.0.10")
     implementation ("io.reactivex.rxjava3:rxkotlin:3.0.1")
     implementation ("com.github.akarnokd:rxjava3-retrofit-adapter:3.0.0")
+
+    //Remote module
+    project(":remote_module")
 
 
 }

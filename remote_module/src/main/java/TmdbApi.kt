@@ -4,6 +4,7 @@ import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
+import ru.MyFilsms.remote_module.entity.TmdbResults
 
 interface TmdbApi {
     @GET("3/movie/{category}")

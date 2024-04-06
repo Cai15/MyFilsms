@@ -6,6 +6,7 @@ import com.example.myfilsms.data.preferenes.PreferenceProvider
 import com.example.myfilsms.domain.Interactor
 import dagger.Module
 import dagger.Provides
+import ru.MyFilsms.remote_module.TmdbApi
 import javax.inject.Singleton
 
 @Module

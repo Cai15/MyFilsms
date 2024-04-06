@@ -23,6 +23,7 @@ import com.example.myfilsms.viewmodel.DetailsFragmentViewModel
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.*
+import ru.MyFilsms.remote_module.entity.ApiConstants
 
 
 class DetailsFragment : Fragment(R.layout.fragment_details) {
