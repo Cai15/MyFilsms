@@ -1,12 +1,10 @@
-import java.lang.ProcessBuilder.Redirect.from
-
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-parcelize")
     id("kotlin-kapt")
 }
-apply from: "$project.rootDir/versions.gradle"
+apply(from = "$project.rootDir//versions.gradle")
 
 
 
@@ -17,12 +15,12 @@ apply from: "$project.rootDir/versions.gradle"
 android {
 
     namespace = "com.example.myfilsms"
-    compileSdk = 34
+    compileSdk = 31
 
     defaultConfig {
         applicationId = "com.example.myfilsms"
         minSdk = 31
-        targetSdk = 34
+        targetSdk = 31
         versionCode = 1
         versionName = "1.0"
 
@@ -96,7 +94,7 @@ android {
 dependencies {
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.12.0-alpha03")
+    implementation("com.google.android.material:material:1.12.0-beta01")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.compose.material3:material3:1.2.1")
     //implementation("com.android.support:support-annotations:28.0.0")
@@ -138,17 +136,19 @@ dependencies {
     implementation ("com.squareup.okhttp3:okhttp:4.12.0")
 
     //Retrofit
-    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation ("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.11.0")
     implementation ("com.squareup.okhttp3:logging-interceptor:4.12.0")
 
     //dagger
-    kapt ("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.9.0")
-    implementation ("com.google.dagger:dagger:2.51")
-    implementation ("com.google.dagger:dagger-android:2.51")
-    implementation ("com.google.dagger:dagger-android-support:2.51")
-    kapt ("com.google.dagger:dagger-compiler:2.51")
-    kapt ("com.google.dagger:dagger-android-processor:2.51")
+   /* kapt ("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.9.0")
+    implementation ("com.google.dagger:dagger:2.51.1")
+    implementation ("com.google.dagger:dagger-android:2.51.1")
+    implementation ("com.google.dagger:dagger-android-support:2.51.1")
+    kapt ("com.google.dagger:dagger-compiler:2.51.1")
+    kapt ("com.google.dagger:dagger-android-processor:2.51.1")*/
+    implementation ("${property("dagger")}")
+    kapt("${property("daggerCo,piler")}")
 
     //Room
     implementation ("androidx.room:room-runtime:2.6.1") // Библиотека "Room"
@@ -165,8 +165,8 @@ dependencies {
     implementation ("androidx.room:room-rxjava3:2.6.1")
 
 //RxJava
-    implementation ("io.reactivex.rxjava3:rxandroid:3.0.0")
-    implementation ("io.reactivex.rxjava3:rxjava:3.0.10")
+    implementation ("io.reactivex.rxjava3:rxandroid:3.0.2")
+    implementation ("io.reactivex.rxjava3:rxjava:3.1.8")
     implementation ("io.reactivex.rxjava3:rxkotlin:3.0.1")
     implementation ("com.github.akarnokd:rxjava3-retrofit-adapter:3.0.0")
 

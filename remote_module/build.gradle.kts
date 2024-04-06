@@ -5,16 +5,16 @@ plugins {
     id ("kotlin-android")
     id ("kotlin-kapt")
 }
-apply from: "$project.rootDir/versions.gradle"
+apply(from = "$project.rootDir//versions.gradle")
 
 
 
 android {
     namespace = "com.example.remote_module"
-    compileSdk = 34
+    compileSdk = 31
 
     defaultConfig {
-        minSdk = 33
+        minSdk = 31
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -41,7 +41,7 @@ android {
 
 dependencies {
 
-    implementation ("org.jetbrains.kotlin:kotlin-stdlib:1.9.21")
+    implementation ("org.jetbrains.kotlin:kotlin-stdlib:1.9.23")
     implementation ("androidx.core:core-ktx:1.12.0")
     implementation ("androidx.appcompat:appcompat:1.6.1")
     implementation ("com.google.android.material:material:1.11.0")
@@ -50,13 +50,13 @@ dependencies {
     androidTestImplementation ("androidx.test.espresso:espresso-core:3.5.1")
 
     //Dagger
-    implementation ("dagger")
-            kapt ("daggerCompiler 2.51")
+    implementation ("${property("dagger")}")
+    kapt("${property("daggerCo,piler")}")
 
             //Retrofit
-            implementation ("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+            implementation ("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.11.0")
     implementation ("com.squareup.okhttp3:logging-interceptor:4.12.0")
     implementation ("com.github.akarnokd:rxjava3-retrofit-adapter:3.0.0")
-    implementation ("io.reactivex.rxjava3:rxjava:3.0.10")
+    implementation ("io.reactivex.rxjava3:rxjava:3.1.8")
 }
