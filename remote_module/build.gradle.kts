@@ -51,7 +51,7 @@ dependencies {
 
     //Dagger
     implementation ("${property("dagger")}")
-    kapt("${property("daggerCo,piler")}")
+    kapt("${property("daggerCompiler")}")
 
             //Retrofit
             implementation ("com.squareup.retrofit2:retrofit:2.11.0")

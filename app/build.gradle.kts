@@ -4,7 +4,7 @@ plugins {
     id("kotlin-parcelize")
     id("kotlin-kapt")
 }
-apply(from = "$project.rootDir//versions.gradle")
+apply(from = "D:\\Ucheba\\MyFilsms\\versions.gradle.kt")
 
 
 
@@ -148,7 +148,7 @@ dependencies {
     kapt ("com.google.dagger:dagger-compiler:2.51.1")
     kapt ("com.google.dagger:dagger-android-processor:2.51.1")*/
     implementation ("${property("dagger")}")
-    kapt("${property("daggerCo,piler")}")
+    kapt("${property("daggerCompiler")}")
 
     //Room
     implementation ("androidx.room:room-runtime:2.6.1") // Библиотека "Room"
