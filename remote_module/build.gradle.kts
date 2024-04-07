@@ -22,6 +22,11 @@ android {
         targetSdk = 34
     }
 
+    buildFeatures {
+        compose = true
+        buildConfig = true
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false

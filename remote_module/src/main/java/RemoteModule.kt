@@ -1,13 +1,14 @@
 package ru.MyFilsms.remote_module
 
+import com.example.remote_module.BuildConfig
 import dagger.Module
 import dagger.Provides
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
-import jp.wasabeef.recyclerview.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import ru.MyFilsms.remote_module.entity.ApiConstants
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -31,7 +32,7 @@ class RemoteModule {
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
         //Указываем базовый URL из констант
-        .baseUrl(ru.MyFilsms.remote_module.entity.ApiConstants.BASE_URL)
+        .baseUrl(ApiConstants.BASE_URL)
         //Добавляем конвертер
         .addConverterFactory(GsonConverterFactory.create())
         //Добавляем поддержку RxJava
