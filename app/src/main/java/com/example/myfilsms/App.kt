@@ -2,6 +2,7 @@ package com.example.myfilsms
 
 import android.app.Application
 import com.example.myfilsms.di.AppComponent
+import com.example.myfilsms.di.DaggerAppComponent
 import com.example.myfilsms.di.modules.DatabaseModule
 import com.example.myfilsms.di.modules.DomainModule
 import ru.MyFilsms.remote_module.DaggerRemoteComponent

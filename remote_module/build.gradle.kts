@@ -23,7 +23,10 @@ android {
     }
 
     buildFeatures {
+        viewBinding = true
         compose = true
+        dataBinding = true
+        prefab = true
         buildConfig = true
     }
 
@@ -47,10 +50,20 @@ android {
         correctErrorTypes = true
     }
 
+    composeOptions {
+        kotlinCompilerExtensionVersion =  "1.5.11"
+    }
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
+    ndkVersion = "25.2.9519653"
 }
 
 dependencies {
-
+    implementation ("androidx.compose.compiler:compiler:1.5.11")
+    implementation ("androidx.activity:activity-compose:1.8.2")
     implementation ("org.jetbrains.kotlin:kotlin-stdlib:1.9.23")
     implementation ("androidx.core:core-ktx:1.12.0")
     implementation ("androidx.appcompat:appcompat:1.6.1")

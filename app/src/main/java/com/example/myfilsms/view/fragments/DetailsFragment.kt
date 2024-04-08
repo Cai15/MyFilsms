@@ -182,7 +182,7 @@ class DetailsFragment : Fragment() {
             //Открываем канал для записи на диск
             val outputStream = contentResolver.openOutputStream(uri!!)
             //Передаем нашу картинку, может сделать компрессию
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+            outputStream?.let { bitmap.compress(Bitmap.CompressFormat.JPEG, 100, it) }
             //Закрываем поток
             outputStream?.close()
         } else {
