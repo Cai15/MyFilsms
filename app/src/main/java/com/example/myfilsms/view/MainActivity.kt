@@ -1,6 +1,9 @@
 package com.example.myfilsms.view
 
 
+import android.content.BroadcastReceiver
+import android.content.Intent
+import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,11 +15,13 @@ import com.example.myfilsms.view.fragments.SelectionsFragment
 import com.example.myfilsms.view.fragments.WatchLaterFragment
 import com.example.myfilsms.databinding.ActivityMainBinding
 import com.example.myfilsms.data.entity.Film
+import com.example.myfilsms.receivers.ConnectionChecker
 import com.example.myfilsms.view.fragments.SettingsFragment
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var receiver: BroadcastReceiver
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +38,17 @@ class MainActivity : AppCompatActivity() {
             .addToBackStack(null)
             .commit()
 
+        receiver = ConnectionChecker()
+        val filters = IntentFilter().apply {
+            addAction(Intent.ACTION_POWER_CONNECTED)
+            addAction(Intent.ACTION_BATTERY_LOW)
+        }
+        registerReceiver(receiver, filters)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(receiver)
     }
 
     fun launchDetailsFragment(film: Film) {
