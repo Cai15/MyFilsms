@@ -21,6 +21,7 @@ import com.bumptech.glide.Glide
 import com.example.myfilsms.R
 import com.example.myfilsms.data.entity.Film
 import com.example.myfilsms.databinding.FragmentDetailsBinding
+import com.example.myfilsms.view.notifications.NotificationHelper
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.*
 import ru.MyFilsms.remote_module.entity.ApiConstants
@@ -72,6 +73,10 @@ class DetailsFragment : Fragment() {
 
         binding.detailsFabDownloadWp.setOnClickListener {
             performAsyncLoadOfPoster()
+        }
+
+        binding.detailsFabWatchLater.setOnClickListener {
+            NotificationHelper.createNotification(requireContext(), film)
         }
     }
 
@@ -182,7 +187,9 @@ class DetailsFragment : Fragment() {
             //Открываем канал для записи на диск
             val outputStream = contentResolver.openOutputStream(uri!!)
             //Передаем нашу картинку, может сделать компрессию
-            outputStream?.let { bitmap.compress(Bitmap.CompressFormat.JPEG, 100, it) }
+            if (outputStream != null) {
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+            }
             //Закрываем поток
             outputStream?.close()
         } else {

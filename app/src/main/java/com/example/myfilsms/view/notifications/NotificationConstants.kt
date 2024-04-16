@@ -1,0 +1,5 @@
+package com.example.myfilsms.view.notifications
+
+object NotificationConstants {
+    const val CHANNEL_ID = "FilmsSearchChannel"
+}
