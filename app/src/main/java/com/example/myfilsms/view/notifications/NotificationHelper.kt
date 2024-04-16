@@ -24,7 +24,7 @@ object NotificationHelper {
         val pendingIntent =
             PendingIntent.getActivity(context, 0, mIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 
-        val builder = NotificationCompat.Builder(context, NotificationConstants.CHANNEL_ID).apply {
+        val builder = NotificationCompat.Builder(context!!, NotificationConstants.CHANNEL_ID).apply {
             setSmallIcon(R.drawable.ic_outline_watch_later_24)
             setContentTitle("Не забудьте посмотреть!")
             setContentText(film.title)
