@@ -171,5 +171,8 @@ dependencies {
     //Remote module
     project(":remote_module")
 
+    //Ошибки Pendding
+    implementation ("androidx.work:work-runtime-ktx:2.9.0")
+
 
 }
