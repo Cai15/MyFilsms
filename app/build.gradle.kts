@@ -1,3 +1,5 @@
+import org.gradle.internal.impldep.org.jsoup.safety.Safelist.basic
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -62,6 +64,21 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    flavorDimensions "version"
+    productFlavors {
+        basic {
+            dimension "version"
+            applicationIdSuffix ".basic"
+            versionNameSuffix "-basic"
+        }
+        pro {
+            dimension "version"
+            applicationIdSuffix ".pro"
+            versionNameSuffix "-pro"
+        }
+    }
+
     buildFeatures {
         viewBinding = true
         compose = true
