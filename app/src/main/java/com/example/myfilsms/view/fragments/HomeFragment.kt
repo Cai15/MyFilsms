@@ -1,5 +1,6 @@
 package com.example.myfilsms.view.fragments
 
+import com.example.myfilsms.view.MainActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +17,6 @@ import com.example.myfilsms.databinding.FragmentHomeBinding
 import com.example.myfilsms.utils.AnimationHelper
 import com.example.myfilsms.utils.AutoDisposable
 import com.example.myfilsms.utils.addTo
-import com.example.myfilsms.view.MainActivity
 import com.example.myfilsms.view.rv_adapters.FilmListRecyclerAdapter
 import com.example.myfilsms.viewmodel.HomeFragmentViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers

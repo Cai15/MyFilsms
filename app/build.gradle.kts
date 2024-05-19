@@ -49,11 +49,23 @@ android {
 
 
     buildTypes {
+        flavorDimensions += "version"
+        productFlavors {
+            create ("basic") {
+                dimension = "version"
+                applicationIdSuffix = ".basic"
+                versionNameSuffix = "-basic"
+            }
+            create ("pro") {
+                dimension = "version"
+                applicationIdSuffix = ".pro"
+                versionNameSuffix = "-pro"
+            }
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
         }
     }
@@ -65,19 +77,7 @@ android {
         jvmTarget = "1.8"
     }
 
-    flavorDimensions "version"
-    productFlavors {
-        basic {
-            dimension "version"
-            applicationIdSuffix ".basic"
-            versionNameSuffix "-basic"
-        }
-        pro {
-            dimension "version"
-            applicationIdSuffix ".pro"
-            versionNameSuffix "-pro"
-        }
-    }
+
 
     buildFeatures {
         viewBinding = true
@@ -101,6 +101,22 @@ android {
         includeInApk = true
     }
     buildToolsVersion = "34.0.0"
+    sourceSets {
+        getByName("basic") {
+            java {
+                srcDirs("src\\basic\\java", "src\\basic\\java",
+                    "src\\basic\\java"
+                )
+            }
+        }
+        getByName("pro") {
+            java {
+                srcDirs("src\\pro\\java", "src\\pro\\java",
+                    "src\\pro\\java"
+                )
+            }
+        }
+    }
 }
 
 

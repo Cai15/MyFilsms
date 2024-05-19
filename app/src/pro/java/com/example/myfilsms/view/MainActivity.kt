@@ -1,22 +1,20 @@
-package com.example.myfilsms.view
-
+package com.exemple.myfilsms.view
 
 import android.content.BroadcastReceiver
 import android.content.Intent
 import android.content.IntentFilter
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.myfilsms.view.fragments.DetailsFragment
-import com.example.myfilsms.view.fragments.FavoritesFragment
-import com.example.myfilsms.view.fragments.HomeFragment
 import com.example.myfilsms.R
-import com.example.myfilsms.view.fragments.SelectionsFragment
-import com.example.myfilsms.view.fragments.WatchLaterFragment
-import com.example.myfilsms.databinding.ActivityMainBinding
 import com.example.myfilsms.data.entity.Film
+import com.example.myfilsms.databinding.ActivityMainBinding
 import com.example.myfilsms.receivers.ConnectionChecker
+import com.example.myfilsms.view.fragments.DetailsFragment
+import com.example.myfilsms.view.fragments.HomeFragment
 import com.example.myfilsms.view.fragments.SettingsFragment
+import com.example.myfilsms.view.fragments.WatchLaterFragment
 
 
 class MainActivity : AppCompatActivity() {

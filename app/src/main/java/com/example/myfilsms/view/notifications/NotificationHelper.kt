@@ -1,5 +1,6 @@
 package com.example.myfilsms.view.notifications
 
+import com.example.myfilsms.view.MainActivity
 import android.annotation.SuppressLint
 import android.app.AlarmManager
 import android.app.DatePickerDialog
@@ -18,7 +19,6 @@ import com.bumptech.glide.request.transition.Transition
 import com.example.myfilsms.R
 import com.example.myfilsms.data.entity.Film
 import com.example.myfilsms.receivers.ReminderBroadcast
-import com.example.myfilsms.view.MainActivity
 import ru.MyFilsms.remote_module.entity.ApiConstants
 import java.util.*
 

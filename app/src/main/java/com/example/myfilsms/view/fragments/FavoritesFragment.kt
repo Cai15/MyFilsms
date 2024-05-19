@@ -1,5 +1,6 @@
 package com.example.myfilsms.view.fragments
 
+import com.example.myfilsms.view.MainActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,7 +11,6 @@ import com.example.myfilsms.view.rv_adapters.TopSpacingItemDecoration
 import com.example.myfilsms.databinding.FragmentFavoritesBinding
 import com.example.myfilsms.data.entity.Film
 import com.example.myfilsms.utils.AnimationHelper
-import com.example.myfilsms.view.MainActivity
 import com.example.myfilsms.view.rv_adapters.FilmListRecyclerAdapter
 
 
