@@ -7,6 +7,7 @@ plugins {
     id("kotlin-kapt")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
+    id("com.google.firebase.firebase-perf")
 }
 apply(from = "D:\\Ucheba\\MyFilsms\\versions.gradle.kt")
 
@@ -133,6 +134,8 @@ dependencies {
     implementation("androidx.compose.material3:material3:1.2.1")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation(project(":remote_module"))
+    implementation("com.google.firebase:firebase-perf:21.0.1")
+    implementation("com.google.firebase:firebase-config:22.0.0")
 
     annotationProcessor("androidx.room:room-compiler-processing-testing:2.6.1")
     testImplementation("junit:junit:4.13.2")
