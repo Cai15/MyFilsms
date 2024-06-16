@@ -2,6 +2,7 @@ package com.example.myfilsms.view.rv_adapters
 
 
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -42,6 +43,7 @@ class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) : 
     }
 
     //Метод для добавления объектов в наш список
+    @SuppressLint("NotifyDataSetChanged")
     fun addItems(list: List<Film>) {
         //Сначала очишаем(если не реализовать DiffUtils)
         items.clear()
