@@ -2,11 +2,11 @@ package com.example.myfilsms.di.modules
 
 import android.content.Context
 import com.example.myfilsms.data.MainRepository
-import com.example.myfilsms.data.TmdbApi
 import com.example.myfilsms.data.preferenes.PreferenceProvider
 import com.example.myfilsms.domain.Interactor
 import dagger.Module
 import dagger.Provides
+import ru.MyFilsms.remote_module.TmdbApi
 import javax.inject.Singleton
 
 @Module

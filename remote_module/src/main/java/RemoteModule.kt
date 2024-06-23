@@ -1,15 +1,14 @@
-package com.example.myfilsms.di.modules
+package ru.MyFilsms.remote_module
 
-
-import com.example.myfilsms.data.ApiConstants
-import com.example.myfilsms.data.TmdbApi
+import com.example.remote_module.BuildConfig
 import dagger.Module
 import dagger.Provides
-import jp.wasabeef.recyclerview.BuildConfig
+import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import ru.MyFilsms.remote_module.entity.ApiConstants
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -36,6 +35,8 @@ class RemoteModule {
         .baseUrl(ApiConstants.BASE_URL)
         //Добавляем конвертер
         .addConverterFactory(GsonConverterFactory.create())
+        //Добавляем поддержку RxJava
+        .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
         //Добавляем кастомный клиент
         .client(okHttpClient)
         .build()

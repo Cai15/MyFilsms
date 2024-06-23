@@ -1,24 +1,22 @@
 package com.example.myfilsms.view.fragments
 
+import com.example.myfilsms.view.MainActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.myfilsms.view.rv_adapters.FilmListRecyclerAdapter
-import com.example.myfilsms.R
 import com.example.myfilsms.view.rv_adapters.TopSpacingItemDecoration
 import com.example.myfilsms.databinding.FragmentFavoritesBinding
 import com.example.myfilsms.data.entity.Film
 import com.example.myfilsms.utils.AnimationHelper
-import com.example.myfilsms.view.MainActivity
+import com.example.myfilsms.view.rv_adapters.FilmListRecyclerAdapter
 
 
-class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
-    private lateinit var binding: FragmentFavoritesBinding
+class FavoritesFragment : Fragment() {
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
-
+    private lateinit var binding: FragmentFavoritesBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

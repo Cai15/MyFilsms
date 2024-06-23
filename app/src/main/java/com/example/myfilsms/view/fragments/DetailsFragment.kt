@@ -11,29 +11,28 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.myfilsms.data.entity.Film
-import com.example.myfilsms.R
-import com.example.myfilsms.data.ApiConstants
-import com.example.myfilsms.databinding.FragmentDetailsBinding
 import com.example.myfilsms.viewmodel.DetailsFragmentViewModel
 import com.bumptech.glide.Glide
+import com.example.myfilsms.R
+import com.example.myfilsms.data.entity.Film
+import com.example.myfilsms.databinding.FragmentDetailsBinding
+import com.example.myfilsms.view.notifications.NotificationHelper
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.*
+import ru.MyFilsms.remote_module.entity.ApiConstants
 
 
-class DetailsFragment : Fragment(R.layout.fragment_details) {
-    private lateinit var binding: FragmentDetailsBinding
-
+class DetailsFragment : Fragment() {
     private lateinit var film: Film
-
+    private lateinit var binding: FragmentDetailsBinding
     private val viewModel: DetailsFragmentViewModel by viewModels()
     private val scope = CoroutineScope(Dispatchers.IO)
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -74,6 +73,10 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
 
         binding.detailsFabDownloadWp.setOnClickListener {
             performAsyncLoadOfPoster()
+        }
+
+        binding.detailsFabWatchLater.setOnClickListener {
+            NotificationHelper.notificationSet(requireContext(), film)
         }
     }
 
@@ -158,36 +161,45 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
 
     private fun saveToGallery(bitmap: Bitmap) {
         //Проверяем версию системы
-        //Создаем объект для передачи данных
-        val contentValues = ContentValues().apply {
-            //Составляем информацию для файла(имя, тип, дата создания, куда сохранять и т.д.)
-            put(MediaStore.Images.Media.TITLE, film.title.handleSingleQuote())
-            put(
-                MediaStore.Images.Media.DISPLAY_NAME,
-                film.title.handleSingleQuote()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            //Создаем объект для передачи данных
+            val contentValues = ContentValues().apply {
+                //Составляем информацию для файла(имя, тип, дата создания, куда сохранять и т.д.)
+                put(MediaStore.Images.Media.TITLE, film.title.handleSingleQuote())
+                put(
+                    MediaStore.Images.Media.DISPLAY_NAME,
+                    film.title.handleSingleQuote()
+                )
+                put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
+                put(
+                    MediaStore.Images.Media.DATE_ADDED,
+                    System.currentTimeMillis() / 1000
+                )
+                put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis())
+                put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/FilmsSearchApp")
+            }
+            //Получаем ссылку на объект Content resolver, которые помогает передвать информацию из приложения во вне
+            val contentResolver = requireActivity().contentResolver
+            val uri = contentResolver.insert(
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                contentValues
             )
-            put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
-            put(
-                MediaStore.Images.Media.DATE_ADDED,
-                System.currentTimeMillis() / 1000
+            //Открываем канал для записи на диск
+            val outputStream = contentResolver.openOutputStream(uri!!)
+            //Передаем нашу картинку, может сделать компрессию
+            outputStream?.let { bitmap.compress(Bitmap.CompressFormat.JPEG, 100, it) }
+            //Закрываем поток
+            outputStream?.close()
+        } else {
+            //Тоже, но для более старых версий ОС
+            @Suppress("DEPRECATION")
+            MediaStore.Images.Media.insertImage(
+                requireActivity().contentResolver,
+                bitmap,
+                film.title.handleSingleQuote(),
+                film.description.handleSingleQuote()
             )
-            put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis())
-            put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/FilmsSearchApp")
         }
-        //Получаем ссылку на объект Content resolver, которые помогает передвать информацию из приложения во вне
-        val contentResolver = requireActivity().contentResolver
-        val uri = contentResolver.insert(
-            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-            contentValues
-        )
-        //Открываем канал для записи на диск
-        val outputStream = contentResolver.openOutputStream(uri!!)
-        //Передаем нашу картинку, может сделать компрессию
-        if (outputStream != null) {
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
-        }
-        //Закрываем поток
-        outputStream?.close()
     }
 
     private fun String.handleSingleQuote(): String {

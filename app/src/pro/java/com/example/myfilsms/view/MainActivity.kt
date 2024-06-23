@@ -1,40 +1,52 @@
-package com.example.myfilsms.view
+package com.exemple.myfilsms.view
 
-
-import androidx.appcompat.app.AppCompatActivity
+import android.content.BroadcastReceiver
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.myfilsms.view.fragments.DetailsFragment
-import com.example.myfilsms.view.fragments.FavoritesFragment
-import com.example.myfilsms.view.fragments.HomeFragment
 import com.example.myfilsms.R
-import com.example.myfilsms.view.fragments.SelectionsFragment
-import com.example.myfilsms.view.fragments.WatchLaterFragment
-import com.example.myfilsms.databinding.ActivityMainBinding
 import com.example.myfilsms.data.entity.Film
+import com.example.myfilsms.databinding.ActivityMainBinding
+import com.example.myfilsms.receivers.ConnectionChecker
+import com.example.myfilsms.view.fragments.DetailsFragment
+import com.example.myfilsms.view.fragments.HomeFragment
 import com.example.myfilsms.view.fragments.SettingsFragment
+import com.example.myfilsms.view.fragments.WatchLaterFragment
 
 
-@Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
-    private var backPressed = 0L
-
     private lateinit var binding: ActivityMainBinding
+    private lateinit var receiver: BroadcastReceiver
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //Инициализируем объект
         binding = ActivityMainBinding.inflate(layoutInflater)
+        //Передаем его в метод
         setContentView(binding.root)
 
         initNavigation()
-
         //Зупускаем фрагмент при старте
         supportFragmentManager
             .beginTransaction()
             .add(R.id.fragment_placeholder, HomeFragment())
             .addToBackStack(null)
             .commit()
+
+        receiver = ConnectionChecker()
+        val filters = IntentFilter().apply {
+            addAction(Intent.ACTION_POWER_CONNECTED)
+            addAction(Intent.ACTION_BATTERY_LOW)
+        }
+        registerReceiver(receiver, filters)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(receiver)
     }
 
     fun launchDetailsFragment(film: Film) {
@@ -55,28 +67,8 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-    override fun onBackPressed() {
-        if (supportFragmentManager.backStackEntryCount == 1) {
-            if (backPressed + TIME_INTERVAL > System.currentTimeMillis()) {
-                super.onBackPressed()
-                finish()
-            } else {
-                Toast.makeText(this, "Для выхода - нажмите еще раз", Toast.LENGTH_SHORT).show()
-            }
-            backPressed = System.currentTimeMillis()
-        } else {
-            super.onBackPressed()
-        }
-    }
-
-    companion object{
-        const val TIME_INTERVAL = 2000
-    }
-
     private fun initNavigation() {
-
         binding.bottomNavigation.setOnNavigationItemSelectedListener {
-
             when (it.itemId) {
                 R.id.home -> {
                     val tag = "home"
@@ -113,8 +105,8 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
-
     }
+
     //Ищем фрагмент по тэгу, если он есть то возвращаем его, если нет - то null
     private fun checkFragmentExistence(tag: String): Fragment? = supportFragmentManager.findFragmentByTag(tag)
 
